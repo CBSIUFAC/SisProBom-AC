@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Setor {
+public class Setor {//implements Serializable
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -32,5 +32,5 @@ public class Setor {
 	
 	@OneToMany(mappedBy="setor")
 	private List<Funcionario> funcionarios;
-
+	//metodos getters and setters
 }
