@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class TipoDocumento {
+public class TipoDocumento {//implements Serializable
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -20,5 +20,5 @@ public class TipoDocumento {
 	
 	@OneToMany(mappedBy="tipo_documento")
 	private List<Documento> documentos;
-
+	//metodos getters and setters
 }
