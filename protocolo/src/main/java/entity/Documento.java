@@ -39,5 +39,5 @@ public class Documento {
 	
 	@OneToMany(mappedBy="documento")
 	private List<Movimentacao> movimentacoes;
-
+	//metodos getters and setters
 }
