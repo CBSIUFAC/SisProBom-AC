@@ -13,7 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Movimentacao {
+public class Movimentacao {//implements Serializable
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -36,5 +36,5 @@ public class Movimentacao {
 	@ManyToOne
 	@JoinColumn(referencedColumnName="id",name="setor",nullable=false)
 	private Setor setor_destino;
-
+	//metodos getters and setters
 }
