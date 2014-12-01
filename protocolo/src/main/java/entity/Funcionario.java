@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Funcionario {
+public class Funcionario {//implements Serializable
 	
 	@Id
 	private int matricula;
@@ -21,5 +21,5 @@ public class Funcionario {
 	
 	@OneToOne(mappedBy="funcionario")
 	private Usuario usuario;
-
+	//metodos getters and setters
 }
