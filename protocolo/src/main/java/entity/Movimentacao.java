@@ -1,5 +1,6 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Movimentacao {//implements Serializable
+public class Movimentacao implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -36,5 +37,61 @@ public class Movimentacao {//implements Serializable
 	@ManyToOne
 	@JoinColumn(referencedColumnName="id",name="setor",nullable=false)
 	private Setor setor_destino;
-	//metodos getters and setters
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Date getData_movimentacao() {
+		return data_movimentacao;
+	}
+
+	public void setData_movimentacao(Date data_movimentacao) {
+		this.data_movimentacao = data_movimentacao;
+	}
+
+	public Date getData_recebimento() {
+		return data_recebimento;
+	}
+
+	public void setData_recebimento(Date data_recebimento) {
+		this.data_recebimento = data_recebimento;
+	}
+
+	public boolean isRecebido() {
+		return recebido;
+	}
+
+	public void setRecebido(boolean recebido) {
+		this.recebido = recebido;
+	}
+
+	public String getDespacho() {
+		return despacho;
+	}
+
+	public void setDespacho(String despacho) {
+		this.despacho = despacho;
+	}
+
+	public Documento getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento(Documento documento) {
+		this.documento = documento;
+	}
+
+	public Setor getSetor_destino() {
+		return setor_destino;
+	}
+
+	public void setSetor_destino(Setor setor_destino) {
+		this.setor_destino = setor_destino;
+	}
+	
 }

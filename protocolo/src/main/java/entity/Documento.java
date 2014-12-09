@@ -1,5 +1,6 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Documento {
+public class Documento implements Serializable {
 	
 	@Id
 	private int protocolo;
@@ -39,5 +40,77 @@ public class Documento {
 	
 	@OneToMany(mappedBy="documento")
 	private List<Movimentacao> movimentacoes;
-	//metodos getters and setters
+
+	public int getProtocolo() {
+		return protocolo;
+	}
+
+	public void setProtocolo(int protocolo) {
+		this.protocolo = protocolo;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public String getAssunto() {
+		return assunto;
+	}
+
+	public void setAssunto(String assunto) {
+		this.assunto = assunto;
+	}
+
+	public String getOrigem() {
+		return origem;
+	}
+
+	public void setOrigem(String origem) {
+		this.origem = origem;
+	}
+
+	public boolean isArquivado() {
+		return arquivado;
+	}
+
+	public void setArquivado(boolean arquivado) {
+		this.arquivado = arquivado;
+	}
+
+	public String getIntegra() {
+		return integra;
+	}
+
+	public void setIntegra(String integra) {
+		this.integra = integra;
+	}
+
+	public Usuario getProtocolista() {
+		return protocolista;
+	}
+
+	public void setProtocolista(Usuario protocolista) {
+		this.protocolista = protocolista;
+	}
+
+	public TipoDocumento getTipo_documento() {
+		return tipo_documento;
+	}
+
+	public void setTipo_documento(TipoDocumento tipo_documento) {
+		this.tipo_documento = tipo_documento;
+	}
+
+	public List<Movimentacao> getMovimentacoes() {
+		return movimentacoes;
+	}
+
+	public void setMovimentacoes(List<Movimentacao> movimentacoes) {
+		this.movimentacoes = movimentacoes;
+	}
+
 }
