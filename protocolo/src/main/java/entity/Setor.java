@@ -21,12 +21,14 @@ public class Setor implements Serializable {
 	@Column(nullable=false)
 	private String nome;
 	
-	@ManyToOne
+	/* A idéia era manter uma hierarquia entre setores,
+	 * mas vaos buscar uma forma melhor de fazer isso
+	 * @ManyToOne
 	@JoinColumn(referencedColumnName="id",name="vinculo",nullable=false)
 	private Setor vinculo;
 	
 	@OneToMany(mappedBy="vinculo")
-	private List<Setor> setores;
+	private List<Setor> setores;*/
 	
 	@OneToMany(mappedBy="setor_destino")
 	private List<Movimentacao> movimentacoes;
@@ -48,22 +50,6 @@ public class Setor implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public Setor getVinculo() {
-		return vinculo;
-	}
-
-	public void setVinculo(Setor vinculo) {
-		this.vinculo = vinculo;
-	}
-
-	public List<Setor> getSetores() {
-		return setores;
-	}
-
-	public void setSetores(List<Setor> setores) {
-		this.setores = setores;
 	}
 
 	public List<Movimentacao> getMovimentacoes() {
