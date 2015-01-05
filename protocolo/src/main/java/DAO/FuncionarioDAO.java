@@ -25,5 +25,5 @@ public class FuncionarioDAO extends MasterDAO {
 	public List<Funcionario> getListaFuncionario() {
 		return getLista("from Funcionario f");
 	}
-
+//
 }
