@@ -25,5 +25,6 @@ public class SetorDAO extends MasterDAO {
 	public List<Setor> getListaSetor() {
 		return getLista("from Setor s");
 	}
+	//
 	
 }
