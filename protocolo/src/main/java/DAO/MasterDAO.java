@@ -5,17 +5,18 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.exception.DataException;
 
 import util.HibernateUtil;
 
 public class MasterDAO {
 	
-	public Session getSession(){
+	public Session getSession() {
 		return HibernateUtil.getSessionFactory().openSession();
 	}
 	
 	//Inserir
-	public void inserirObjeto(Object obj){
+	public void inserirObjeto(Object obj) throws DataException {
 		Session s = getSession();
 		s.beginTransaction();
 		s.save(obj);
@@ -33,7 +34,7 @@ public class MasterDAO {
 	}
 	
 	//Atualizar
-	public void atualizarObjeto(Object obj){
+	public void atualizarObjeto(Object obj) {
 		Session s = getSession();
 		s.beginTransaction();
 		s.update(obj);
@@ -42,7 +43,7 @@ public class MasterDAO {
 	}
 	
 	//Get
-	public <T extends Serializable> T getObjeto(Class<T> classe, int id){
+	public <T extends Serializable> T getObjeto(Class<T> classe, int id) {
 		Session s = getSession();
 		s.beginTransaction();
 		Serializable retorno = (Serializable)s.get(classe, id);
@@ -52,7 +53,7 @@ public class MasterDAO {
 	}
 	
 	//Lista
-	public <T extends Serializable> List<T> getLista(String str){
+	public <T extends Serializable> List<T> getLista(String str) {
 		Session s = getSession();
 		s.beginTransaction();
 		Query qr = s.createQuery(str);
