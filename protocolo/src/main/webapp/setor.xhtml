@@ -1,0 +1,103 @@
+<ui:composition template="/templates/layout.xhtml"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Setores</ui:define>
+	
+	<ui:define name="conteudo">
+	
+		<h:form id="formLista">
+
+			<p:dataTable id="tbl" var="s" value="#{setorBean.listaSetores}"
+						 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						 currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords}"
+		                 paginator="true" rows="10" rowsPerPageTemplate="10,20,30"
+		                 rowKey="#{s.id}" selection="#{setorBean.selecionados}">
+
+				<f:facet name="header">
+
+					<p:toolbar style="border:0; line-height:37px;">
+
+						<f:facet name="left">
+							<h:outputText value="Setores" />
+						</f:facet>
+
+						<f:facet name="right">
+
+							<p:commandButton value="Inserir"
+								onclick="PF('dlgCadastro').show()" icon="ui-icon-circle-plus"
+								update=":formCadastro:nome" process="@this">
+								<p:resetInput target=":formCadastro:nome" />
+							</p:commandButton>
+
+							<p:commandButton value="Remover"
+								actionListener="#{setorBean.deletarSetores}"
+								icon="ui-icon-circle-minus" update=":formLista:tbl" />
+								
+							<p:menuButton value="Exportar">
+							
+								<p:menuitem value="Excel (XLS)" ajax="false">
+									<p:dataExporter type="xls" target="tbl" fileName="setores" />
+								</p:menuitem>
+							
+								<p:menuitem value="PDF" ajax="false">
+									<p:dataExporter type="pdf" target="tbl" fileName="setores" />
+								</p:menuitem>
+							
+								<p:menuitem value="CSV" ajax="false">
+									<p:dataExporter type="csv" target="tbl" fileName="setores" />
+								</p:menuitem>
+							
+								<p:menuitem value="XML" ajax="false">
+									<p:dataExporter type="xml" target="tbl" fileName="setores" />
+								</p:menuitem>
+							
+							</p:menuButton>
+
+						</f:facet>
+
+					</p:toolbar>
+
+				</f:facet>
+		        
+		        <p:column selectionMode="multiple" width="17" />
+			
+			    <p:column headerText="Id" width="40">
+			        <h:outputText value="#{s.id}" />
+			    </p:column>
+			 
+			    <p:column headerText="Nome">
+			        <h:outputText value="#{s.nome}" />
+			    </p:column>
+			    
+			    <f:facet name="footer">
+			    
+			    	
+			    </f:facet>
+			    
+			</p:dataTable>
+			
+		</h:form>
+		
+		<p:dialog id="dlgCadastro" header="Cadastro de Setor" widgetVar="dlgCadastro" modal="true" resizable="false"
+				  showEffect="clip" hideEffect="clip" width="400" appendTo="@(body)">
+			<h:form id="formCadastro">
+				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+				<p:panelGrid columns="2" style="width:100%">
+					<p:outputLabel value="Nome:" />
+					<p:inputText id="nome" value="#{setorBean.setor.nome}" required="true" style="width:96%" />
+					<f:facet name="footer">
+						<p:commandButton value="Cancelar" onclick="PF('dlgCadastro').hide()" style="float:right" icon="ui-icon-cancel" />
+						<p:commandButton value="Limpar" type="reset" style="float:right" icon="ui-icon-arrowreturnthick-1-w" />
+						<p:commandButton value="Salvar" action="#{setorBean.inserirSetor}" update=":formLista:tbl" style="float:right" icon="ui-icon-check" />
+					</f:facet>
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+	
+	</ui:define>
+
+</ui:composition>
