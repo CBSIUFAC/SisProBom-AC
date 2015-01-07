@@ -10,11 +10,11 @@ public class FuncionarioDAO extends MasterDAO {
 		inserirObjeto(funcionario);
 	}
 	
-	public void deletarDocumento(Funcionario funcionario) {
+	public void deletarFuncionario(Funcionario funcionario) {
 		deletarObjeto(funcionario);
 	}
 	
-	public void atualizarDocumento(Funcionario funcionario) {
+	public void atualizarFuncionario(Funcionario funcionario) {
 		atualizarObjeto(funcionario);
 	}
 	

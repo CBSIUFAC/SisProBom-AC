@@ -23,7 +23,7 @@ public class UsuarioDAO extends MasterDAO {
 	
 	public List<Usuario> getListaUsuario() {
 		return getLista("from Usuario u");
-		//
+		
 	}
 
 }
