@@ -1,5 +1,41 @@
 @CHARSET "ISO-8859-1";
 
 .ui-widget, .ui-widget .ui-widget {
-	font-size: 90%;
+	font-size: 95%;
+}
+
+.ui-toolbar {
+	border: 0;
+	line-height: 2em;
+}
+
+.ui-selection-column {
+	width: 1.17em;
+}
+
+.ui-inputfield {
+	width: 96%;
+}
+
+.ui-panelgrid
+.ui-widget-content
+.ui-panelgrid-cell {
+	border-width: 0;
+	/*border-style: solid;
+	border-color: inherit;*/
+	padding: 10px 10px;
+}
+
+.ui-panelgrid
+.ui-widget-content {
+	border-width: 0;
+}
+
+#formCadastro
+.ui-panelgrid {
+	width: 100%;
+}
+
+.botaoForm {
+	float: right;
 }
