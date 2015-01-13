@@ -28,14 +28,13 @@
 						<f:facet name="right">
 
 							<p:commandButton value="Inserir"
-								onclick="PF('dlgCadastro').show()" icon="ui-icon-circle-plus"
-								update=":formCadastro:nome" process="@this">
-								<p:resetInput target=":formCadastro:nome" />
-							</p:commandButton>
+								oncomplete="PF('dlgCadastro').show()"
+								icon="ui-icon-circle-plus" />
 
 							<p:commandButton value="Remover"
-								actionListener="#{setorBean.deletarSetores}"
-								icon="ui-icon-circle-minus" update=":formLista:tbl" />
+								action="#{setorBean.deletarSetores}"
+								icon="ui-icon-circle-minus"
+								update=":formLista:tbl" />
 								
 							<p:menuButton value="Exportar">
 							

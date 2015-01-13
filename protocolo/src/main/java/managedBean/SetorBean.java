@@ -1,18 +1,13 @@
 package managedBean;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
-
-import org.hibernate.HibernateException;
 import org.hibernate.JDBCException;
-import org.hibernate.exception.DataException;
 
 import DAO.SetorDAO;
 import entity.Setor;
@@ -46,7 +41,6 @@ public class SetorBean implements Serializable {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, null, e.getSQLException().getMessage());
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
-		//return "setor";
 	}
 	
 	public String deletarSetor() {
@@ -55,11 +49,12 @@ public class SetorBean implements Serializable {
 		return "setor";
 	}
 	
-	public void deletarSetores(ActionEvent event) {
+	public void deletarSetores() {
 		if (selecionados.length > 0) {
 			for (Setor setor : selecionados) {
 				dao.deletarSetor(setor);
 			}
+			listaSetor = null;
 		}
 	}
 	
