@@ -35,6 +35,7 @@ public class SetorBean implements Serializable {
 		try {
 			dao.inserirSetor(setor);
 			listaSetor = null;
+			setor = null;
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Registro incluído com sucesso!");
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		} catch (JDBCException e) {

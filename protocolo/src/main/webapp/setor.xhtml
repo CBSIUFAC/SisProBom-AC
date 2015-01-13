@@ -82,11 +82,13 @@
 				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<p:panelGrid columns="2">
 					<p:outputLabel value="Nome:" />
-					<p:inputText id="nome" value="#{setorBean.setor.nome}" required="true" />
+					<p:inputText id="nome" value="#{setorBean.setor.nome}" required="true">
+						<p:ajax event="keyup" update="messages" />
+					</p:inputText>
 					<f:facet name="footer">
 						<p:commandButton value="Cancelar" onclick="PF('dlgCadastro').hide()" styleClass="botaoForm" icon="ui-icon-cancel" />
 						<p:commandButton value="Limpar" type="reset" styleClass="botaoForm" icon="ui-icon-arrowreturnthick-1-w" />
-						<p:commandButton value="Salvar" action="#{setorBean.inserirSetor}" update=":formLista:tbl" styleClass="botaoForm" icon="ui-icon-check" />
+						<p:commandButton value="Salvar" action="#{setorBean.inserirSetor}" update=":formLista:tbl :formCadastro" styleClass="botaoForm" icon="ui-icon-check" />
 					</f:facet>
 				</p:panelGrid>
 			</h:form>
