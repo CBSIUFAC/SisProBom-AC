@@ -15,7 +15,7 @@
 						 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						 currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords}"
 		                 paginator="true" rows="10" rowsPerPageTemplate="10,20,30"
-		                 rowKey="#{s.id}" selection="#{funcionarioBean.selecionados}">
+		                 rowKey="#{s.matricula}" selection="#{funcionarioBean.selecionados}">
 
 				<f:facet name="header">
 
@@ -65,12 +65,16 @@
 		        
 		        <p:column selectionMode="multiple" />
 			
-			    <p:column headerText="Id" width="40">
-			        <h:outputText value="#{s.id}" />
+			    <p:column headerText="Matricula:" width="40">
+			        <h:outputText value="#{s.matricula}" />
 			    </p:column>
 			 
 			    <p:column headerText="Nome">
 			        <h:outputText value="#{s.nome}" />
+			    </p:column>
+			    
+			    <p:column headerText="Setor">
+			        <h:outputText value="#{s.setor.nome}" />
 			    </p:column>
 			    
 			</p:dataTable>
@@ -84,10 +88,17 @@
 				<p:panelGrid columns="2">
 					<p:outputLabel value="Nome:" />
 					<p:inputText id="nome" value="#{funcionarioBean.funcionario.nome}" required="true" />
+					<p:outputLabel value="Matricula:" />
+					<p:inputText id="matricula" value="#{funcionarioBean.funcionario.matricula}" required="true" />
+					<p:outputLabel value="Setor:"/>
+					<p:selectOneMenu value="#{funcionarioBean.funcionario.setor}" converter="funcionarioConverter">
+						<f:selectItems value="#{setorBean.listaSetores}" var="fa" 
+						   itemLabel="#{fa.nome}" itemValue="#{fa}"></f:selectItems>
+					</p:selectOneMenu>
 					<f:facet name="footer">
 						<p:commandButton value="Cancelar" onclick="PF('dlgCadastro').hide()" styleClass="botaoForm" icon="ui-icon-cancel" />
 						<p:commandButton value="Limpar" type="reset" styleClass="botaoForm" icon="ui-icon-arrowreturnthick-1-w" />
-						<p:commandButton value="Salvar" action="#{funcionarioBean.inserirFuncionario}" update=":formLista:tbl" styleClass="botaoForm" icon="ui-icon-check" />
+						<p:commandButton value="Salvar" action="#{funcionarioBean.inserirFuncionario}" update=":formLista:tbl :formCadastro" styleClass="botaoForm" icon="ui-icon-check" />
 					</f:facet>
 				</p:panelGrid>
 			</h:form>
