@@ -10,12 +10,19 @@
 	<ui:define name="conteudo">
 	
 		<h:form id="formLista">
+		
+			<p:growl id="growl" showDetail="true" autoUpdate="true" showSummary="false" />
 
 			<p:dataTable id="tbl" var="s" value="#{setorBean.listaSetores}"
 						 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						 currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords}"
 		                 paginator="true" rows="10" rowsPerPageTemplate="10,20,30"
 		                 rowKey="#{s.id}" selection="#{setorBean.selecionados}">
+		        
+		        <p:ajax event="rowDblselect"
+		        	oncomplete="PF('dlgCadastro').show()"
+		        	update=":formCadastro"
+		        	listener="#{setorBean.preparaEdicao}" />
 
 				<f:facet name="header">
 
@@ -77,18 +84,17 @@
 		</h:form>
 		
 		<p:dialog id="dlgCadastro" header="Cadastro de Setor" widgetVar="dlgCadastro" modal="true" resizable="false"
-				  showEffect="clip" hideEffect="clip" width="400" appendTo="@(body)">
+				  width="400" appendTo="@(body)">
 			<h:form id="formCadastro">
-				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<p:panelGrid columns="2">
 					<p:outputLabel value="Nome:" />
-					<p:inputText id="nome" value="#{setorBean.setor.nome}" required="true">
-						<p:ajax event="keyup" update="messages" />
-					</p:inputText>
+					<p:inputText id="nome" value="#{setorBean.setor.nome}" required="true" />
 					<f:facet name="footer">
-						<p:commandButton value="Cancelar" onclick="PF('dlgCadastro').hide()" styleClass="botaoForm" icon="ui-icon-cancel" />
+						<p:commandButton value="Cancelar" action="#{setorBean.cancelar}" process="@this" update=":formCadastro" oncomplete="PF('dlgCadastro').hide()" styleClass="botaoForm" icon="ui-icon-cancel">
+							<p:resetInput target="@form" />
+						</p:commandButton>
 						<p:commandButton value="Limpar" type="reset" styleClass="botaoForm" icon="ui-icon-arrowreturnthick-1-w" />
-						<p:commandButton value="Salvar" action="#{setorBean.inserirSetor}" update=":formLista:tbl :formCadastro" styleClass="botaoForm" icon="ui-icon-check" />
+						<p:commandButton value="Salvar" action="#{setorBean.salvarSetor}" update=":formLista:tbl :formCadastro" styleClass="botaoForm" icon="ui-icon-check" />
 					</f:facet>
 				</p:panelGrid>
 			</h:form>
