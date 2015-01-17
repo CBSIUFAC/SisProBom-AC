@@ -1,0 +1,118 @@
+<ui:composition template="/templates/layout.xhtml"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Tipo Documento</ui:define>
+	
+	<ui:define name="conteudo">
+	
+		<h:form id="formLista">
+		
+			<p:growl id="growl" showDetail="true" autoUpdate="true" showSummary="false" />
+
+			<p:dataTable id="tbl"
+						 var="r"
+						 value="#{tipoDocumentoBean.lista}"
+						 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						 currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords}"
+		                 paginator="true"
+		                 rows="10"
+		                 rowsPerPageTemplate="10,20,30"
+		                 rowKey="#{r.id}"
+		                 selection="#{tipoDocumentoBean.selecionados}"
+		                 filteredValue="#{tipoDocumentoBean.filtro}">
+		        
+		        <p:ajax event="rowDblselect"
+		        	oncomplete="PF('dlgCadastro').show()"
+		        	update=":formCadastro"
+		        	listener="#{tipoDocumentoBean.preparaEdicao}" />
+
+				<f:facet name="header">
+
+					<p:toolbar>
+
+						<f:facet name="left">
+							<h:outputText value="Tipo Documento" />
+						</f:facet>
+
+						<f:facet name="right">
+
+							<p:commandButton value="Inserir"
+								oncomplete="PF('dlgCadastro').show()"
+								icon="ui-icon-circle-plus" />
+
+							<p:commandButton value="Remover"
+								action="#{tipoDocumentoBean.deletarTipoDocumentos}"
+								icon="ui-icon-circle-minus"
+								update=":formLista:tbl">
+								<p:confirm header="Confirmação" message="Você deseja remover o(s) registro(s) selecionado(s)?" icon="ui-icon-alert" />
+							</p:commandButton>
+								
+							<p:menuButton value="Exportar">
+							
+								<p:menuitem value="Excel (XLS)" ajax="false">
+									<p:dataExporter type="xls" target="tbl" fileName="setores" />
+								</p:menuitem>
+							
+								<p:menuitem value="PDF" ajax="false">
+									<p:dataExporter type="pdf" target="tbl" fileName="setores" />
+								</p:menuitem>
+							
+								<p:menuitem value="CSV" ajax="false">
+									<p:dataExporter type="csv" target="tbl" fileName="setores" />
+								</p:menuitem>
+							
+								<p:menuitem value="XML" ajax="false">
+									<p:dataExporter type="xml" target="tbl" fileName="setores" />
+								</p:menuitem>
+							
+							</p:menuButton>
+
+						</f:facet>
+
+					</p:toolbar>
+
+				</f:facet>
+		        
+		        <p:column selectionMode="multiple" />
+			
+			    <p:column headerText="Id" styleClass="columnId" filterBy="#{r.id}" filterMatchMode="exact" filterStyleClass="filterId" sortBy="#{r.id}">
+			        <h:outputText value="#{r.id}" />
+			    </p:column>
+			 
+			    <p:column headerText="Nome" filterBy="#{r.nome}" filterMatchMode="contains" sortBy="#{r.nome}">
+			        <h:outputText value="#{r.nome}" />
+			    </p:column>
+			    
+			</p:dataTable>
+			
+			<p:confirmDialog global="true" closeOnEscape="true">
+				<p:commandButton value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+			
+		</h:form>
+		
+		<p:dialog id="dlgCadastro" header="Cadastro de Setor" widgetVar="dlgCadastro" modal="true" resizable="false"
+				  width="400" appendTo="@(body)">
+			<h:form id="formCadastro">
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Nome:" />
+					<p:inputText id="nome" value="#{tipoDocumentoBean.tipoDocumento.nome}" required="true" />
+					<f:facet name="footer">
+						<p:commandButton value="Salvar" action="#{tipoDocumentoBean.salvarTipoDocumento}" update=":formLista:tbl :formCadastro" styleClass="botaoForm" icon="ui-icon-check" />
+						<p:commandButton value="Limpar" type="reset" styleClass="botaoForm" icon="ui-icon-arrowreturnthick-1-w" />
+						<p:commandButton value="Cancelar" action="#{tipoDocumentoBean.cancelar}" process="@this" update=":formCadastro" oncomplete="PF('dlgCadastro').hide()" styleClass="botaoForm" icon="ui-icon-cancel">
+							<p:resetInput target="@form" />
+						</p:commandButton>
+					</f:facet>
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+	
+	</ui:define>
+
+</ui:composition>
