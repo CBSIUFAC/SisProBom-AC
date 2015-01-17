@@ -15,7 +15,7 @@
 						 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						 currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords}"
 		                 paginator="true" rows="10" rowsPerPageTemplate="10,20,30"
-		                 rowKey="#{s.matricula}" selection="#{funcionarioBean.selecionados}">
+		                 >
 
 				<f:facet name="header">
 
@@ -73,10 +73,6 @@
 			        <h:outputText value="#{s.nome}" />
 			    </p:column>
 			    
-			    <p:column headerText="Setor">
-			        <h:outputText value="#{s.setor.nome}" />
-			    </p:column>
-			    
 			</p:dataTable>
 			
 		</h:form>
@@ -91,7 +87,7 @@
 					<p:outputLabel value="Matricula:" />
 					<p:inputText id="matricula" value="#{funcionarioBean.funcionario.matricula}" required="true" />
 					<p:outputLabel value="Setor:"/>
-					<p:selectOneMenu value="#{funcionarioBean.funcionario.setor}" converter="funcionarioConverter">
+					<p:selectOneMenu value="#{funcionarioBean.funcionario.setor}" converter="funcionarioConverter" >
 						<f:selectItems value="#{setorBean.lista}" var="fa" 
 						   itemLabel="#{fa.nome}" itemValue="#{fa}"></f:selectItems>
 					</p:selectOneMenu>
