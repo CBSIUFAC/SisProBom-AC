@@ -13,11 +13,17 @@
 		
 			<p:growl id="growl" showDetail="true" autoUpdate="true" showSummary="false" />
 
-			<p:dataTable id="tbl" var="s" value="#{setorBean.listaSetores}"
+			<p:dataTable id="tbl"
+						 var="r"
+						 value="#{setorBean.lista}"
 						 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						 currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords}"
-		                 paginator="true" rows="10" rowsPerPageTemplate="10,20,30"
-		                 rowKey="#{s.id}" selection="#{setorBean.selecionados}">
+		                 paginator="true"
+		                 rows="10"
+		                 rowsPerPageTemplate="10,20,30"
+		                 rowKey="#{r.id}"
+		                 selection="#{setorBean.selecionados}"
+		                 filteredValue="#{setorBean.filtro}">
 		        
 		        <p:ajax event="rowDblselect"
 		        	oncomplete="PF('dlgCadastro').show()"
@@ -41,7 +47,9 @@
 							<p:commandButton value="Remover"
 								action="#{setorBean.deletarSetores}"
 								icon="ui-icon-circle-minus"
-								update=":formLista:tbl" />
+								update=":formLista:tbl">
+								<p:confirm header="Confirmação" message="Você deseja remover o(s) registro(s) selecionado(s)?" icon="ui-icon-alert" />
+							</p:commandButton>
 								
 							<p:menuButton value="Exportar">
 							
@@ -71,15 +79,20 @@
 		        
 		        <p:column selectionMode="multiple" />
 			
-			    <p:column headerText="Id" width="40">
-			        <h:outputText value="#{s.id}" />
+			    <p:column headerText="Id" styleClass="columnId" filterBy="#{r.id}" filterMatchMode="exact" filterStyleClass="filterId" sortBy="#{r.id}">
+			        <h:outputText value="#{r.id}" />
 			    </p:column>
 			 
-			    <p:column headerText="Nome">
-			        <h:outputText value="#{s.nome}" />
+			    <p:column headerText="Nome" filterBy="#{r.nome}" filterMatchMode="contains" sortBy="#{r.nome}">
+			        <h:outputText value="#{r.nome}" />
 			    </p:column>
 			    
 			</p:dataTable>
+			
+			<p:confirmDialog global="true" closeOnEscape="true">
+				<p:commandButton value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
 			
 		</h:form>
 		
@@ -90,11 +103,11 @@
 					<p:outputLabel value="Nome:" />
 					<p:inputText id="nome" value="#{setorBean.setor.nome}" required="true" />
 					<f:facet name="footer">
+						<p:commandButton value="Salvar" action="#{setorBean.salvarSetor}" update=":formLista:tbl :formCadastro" styleClass="botaoForm" icon="ui-icon-check" />
+						<p:commandButton value="Limpar" type="reset" styleClass="botaoForm" icon="ui-icon-arrowreturnthick-1-w" />
 						<p:commandButton value="Cancelar" action="#{setorBean.cancelar}" process="@this" update=":formCadastro" oncomplete="PF('dlgCadastro').hide()" styleClass="botaoForm" icon="ui-icon-cancel">
 							<p:resetInput target="@form" />
 						</p:commandButton>
-						<p:commandButton value="Limpar" type="reset" styleClass="botaoForm" icon="ui-icon-arrowreturnthick-1-w" />
-						<p:commandButton value="Salvar" action="#{setorBean.salvarSetor}" update=":formLista:tbl :formCadastro" styleClass="botaoForm" icon="ui-icon-check" />
 					</f:facet>
 				</p:panelGrid>
 			</h:form>

@@ -1,6 +1,7 @@
 @CHARSET "ISO-8859-1";
 
-.ui-widget, .ui-widget .ui-widget {
+.ui-widget,
+.ui-widget .ui-widget {
 	font-size: 95%;
 }
 
@@ -17,25 +18,47 @@
 	width: 96%;
 }
 
-.ui-panelgrid
-.ui-widget-content
-.ui-panelgrid-cell {
+.ui-panelgrid .ui-widget-content .ui-panelgrid-cell {
 	border-width: 0;
-	/*border-style: solid;
-	border-color: inherit;*/
 	padding: 10px 10px;
 }
 
-.ui-panelgrid
-.ui-widget-content {
+.ui-panelgrid .ui-widget-content {
 	border-width: 0;
 }
 
-#formCadastro
-.ui-panelgrid {
+#formCadastro .ui-panelgrid {
 	width: 100%;
 }
 
 .botaoForm {
-	float: right;
+	margin: 0.25em;
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+	text-align: center !important;
+}
+
+.ui-panelgrid .ui-panelgrid-footer {
+	text-align: right !important;
+}
+
+.ui-panelgrid-footer .ui-widget-header {
+	border: 0;
+}
+
+.ui-dialog .ui-dialog-content {
+	padding: 0 !important;
+}
+
+.ui-confirm-dialog .ui-dialog-content {
+	padding: .5em 1em !important;
+}
+
+.columnId {
+	width: 4.5em !important;
+}
+
+.filterId {
+	width: 4em !important;
 }

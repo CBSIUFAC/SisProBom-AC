@@ -21,7 +21,8 @@ public class SetorBean implements Serializable {
 	
 	private Setor setor;
 	private SetorDAO dao = new SetorDAO();
-	private List<Setor> listaSetor = null;
+	private List<Setor> lista = null;
+	private List<Setor> filtro = null;
 	private Setor[] selecionados;
 	
 	public Setor getSetor() {
@@ -46,7 +47,7 @@ public class SetorBean implements Serializable {
 				RequestContext.getCurrentInstance().execute("PF('dlgCadastro').hide()");
 				selecionados = null;
 			}
-			listaSetor = null;
+			lista = null;
 			setor = null;
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, textoMsg);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -62,7 +63,7 @@ public class SetorBean implements Serializable {
 				for (Setor setor : selecionados) {
 					dao.deletarSetor(setor);
 				}
-				listaSetor = null;
+				lista = null;
 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Registro removido com sucesso!");
 				FacesContext.getCurrentInstance().addMessage(null, msg);
 			} catch (JDBCException e) {
@@ -72,10 +73,18 @@ public class SetorBean implements Serializable {
 		}
 	}
 	
-	public List<Setor> getListaSetores() {
-		if(listaSetor == null)
-			listaSetor = dao.getListaSetor();
-		return listaSetor;
+	public List<Setor> getLista() {
+		if(lista == null)
+			lista = dao.getListaSetor();
+		return lista;
+	}
+	
+	public List<Setor> getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(List<Setor> filtro) {
+		this.filtro = filtro;
 	}
 
 	public Setor[] getSelecionados() {
