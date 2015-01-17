@@ -75,6 +75,11 @@
     	<artifactId>itext</artifactId>
     	<version>4.2.1</version>
     </dependency>
+    <dependency>
+    	<groupId>org.omnifaces</groupId>
+    	<artifactId>omnifaces</artifactId>
+    	<version>1.10</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>protocolo</finalName>
