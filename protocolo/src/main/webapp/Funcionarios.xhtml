@@ -11,7 +11,7 @@
 	
 		<h:form id="formLista">
 
-			<p:dataTable id="tbl" var="s" value="#{funcionarioBean.listaFuncionarios}"
+			<p:dataTable id="tbl" var="s" value="#{funcionarioBean.lista}"
 						 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						 currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords}"
 		                 paginator="true" rows="10" rowsPerPageTemplate="10,20,30"
@@ -34,7 +34,7 @@
 							</p:commandButton>
 
 							<p:commandButton value="Remover"
-								actionListener="#{funcionarioBean.deletarFuncionario}"
+								actionListener="#{funcionarioBean.deletarFuncionarios}"
 								icon="ui-icon-circle-minus" update=":formLista:tbl" />
 								
 							<p:menuButton value="Exportar">
@@ -92,13 +92,13 @@
 					<p:inputText id="matricula" value="#{funcionarioBean.funcionario.matricula}" required="true" />
 					<p:outputLabel value="Setor:"/>
 					<p:selectOneMenu value="#{funcionarioBean.funcionario.setor}" converter="funcionarioConverter">
-						<f:selectItems value="#{setorBean.listaSetores}" var="fa" 
+						<f:selectItems value="#{setorBean.lista}" var="fa" 
 						   itemLabel="#{fa.nome}" itemValue="#{fa}"></f:selectItems>
 					</p:selectOneMenu>
 					<f:facet name="footer">
 						<p:commandButton value="Cancelar" onclick="PF('dlgCadastro').hide()" styleClass="botaoForm" icon="ui-icon-cancel" />
 						<p:commandButton value="Limpar" type="reset" styleClass="botaoForm" icon="ui-icon-arrowreturnthick-1-w" />
-						<p:commandButton value="Salvar" action="#{funcionarioBean.inserirFuncionario}" update=":formLista:tbl :formCadastro" styleClass="botaoForm" icon="ui-icon-check" />
+						<p:commandButton value="Salvar" action="#{funcionarioBean.salvarFuncionario}" update=":formLista:tbl :formCadastro" styleClass="botaoForm" icon="ui-icon-check" />
 					</f:facet>
 				</p:panelGrid>
 			</h:form>
