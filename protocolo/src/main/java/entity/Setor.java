@@ -17,7 +17,7 @@ public class Setor implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	@Column(nullable=false)
 	private String nome;
 	
@@ -66,6 +66,16 @@ public class Setor implements Serializable {
 
 	public void setFuncionarios(List<Funcionario> funcionarios) {
 		this.funcionarios = funcionarios;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s[id=%d]", getClass().getSimpleName(), getId());
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return (obj instanceof Setor) && (id != null) ? id.equals(((Setor) obj).id) : (obj == this);
 	}
 
 }

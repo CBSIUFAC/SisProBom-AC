@@ -26,7 +26,7 @@ public class Usuario implements Serializable {
 	private int perfil;
 	
 	@OneToOne
-	@JoinColumn(referencedColumnName="matricula",name="funcionario",nullable=false)
+	@JoinColumn(referencedColumnName="id",name="funcionario",nullable=false)
 	private Funcionario funcionario;
 	
 	@OneToMany(mappedBy="protocolista")

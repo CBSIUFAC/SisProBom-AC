@@ -1,18 +1,16 @@
 package managedBean;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 
-import org.hibernate.HibernateException;
 import org.hibernate.JDBCException;
-import org.hibernate.exception.DataException;
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 import DAO.FuncionarioDAO;
 import entity.Funcionario;
@@ -23,7 +21,8 @@ public class FuncionarioBean implements Serializable {
 	
 	private Funcionario funcionario;
 	private FuncionarioDAO dao = new FuncionarioDAO();
-	private List<Funcionario> listaFuncionario = null;
+	private List<Funcionario> lista = null;
+	private List<Funcionario> filtro = null;
 	private Funcionario[] selecionados;
 	
 	public Funcionario getFuncionario() {
@@ -36,37 +35,56 @@ public class FuncionarioBean implements Serializable {
 		this.funcionario = funcionario;
 	}
 	
-	public void inserirFuncionario() {
+	public void salvarFuncionario() {
 		try {
-			dao.inserirFuncionario(funcionario);
-			listaFuncionario = null;
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Registro incluído com sucesso!");
+			String textoMsg = null;
+			if (funcionario.getId() == 0) {
+				dao.inserirFuncionario(funcionario);
+				textoMsg = "Registro incluído com sucesso!";
+			} else {
+				dao.atualizarFuncionario(funcionario);
+				textoMsg = "Registro alterado com sucesso!";
+				RequestContext.getCurrentInstance().execute("PF('dlgCadastro').hide()");
+				selecionados = null;
+			}
+			lista = null;
+			funcionario = null;
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, textoMsg);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		} catch (JDBCException e) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, null, e.getSQLException().getMessage());
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
-		//return "funcionario";
 	}
 	
-	public String deletarFuncionario() {
-		dao.deletarFuncionario(funcionario);
-		listaFuncionario = null;
-		return "funcionario";
-	}
-	
-	public void deletarFuncionarios(ActionEvent event) {
+	public void deletarFuncionarios() {
 		if (selecionados.length > 0) {
-			for (Funcionario funcionario : selecionados) {
-				dao.deletarFuncionario(funcionario);
+			try {
+				for (Funcionario funcionario : selecionados) {
+					dao.deletarFuncionario(funcionario);
+				}
+				lista = null;
+				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Registro removido com sucesso!");
+				FacesContext.getCurrentInstance().addMessage(null, msg);
+			} catch (JDBCException e) {
+				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, null, e.getSQLException().getMessage());
+				FacesContext.getCurrentInstance().addMessage(null, msg);
 			}
 		}
 	}
 	
-	public List<Funcionario> getListaFuncionarios() {
-		if(listaFuncionario == null)
-			listaFuncionario = dao.getListaFuncionario();
-		return listaFuncionario;
+	public List<Funcionario> getLista() {
+		if(lista == null)
+			lista = dao.getListaFuncionario();
+		return lista;
+	}
+	
+	public List<Funcionario> getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(List<Funcionario> filtro) {
+		this.filtro = filtro;
 	}
 
 	public Funcionario[] getSelecionados() {
@@ -75,6 +93,14 @@ public class FuncionarioBean implements Serializable {
 
 	public void setSelecionados(Funcionario[] selecionados) {
 		this.selecionados = selecionados;
+	}
+	
+	public void preparaEdicao(SelectEvent e) {
+		funcionario = (Funcionario) e.getObject();
+	}
+	
+	public void cancelar() {
+		funcionario = null;
 	}
 
 }
