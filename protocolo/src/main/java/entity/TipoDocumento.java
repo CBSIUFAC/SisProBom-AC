@@ -15,18 +15,18 @@ public class TipoDocumento implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	@Column(nullable=false)
 	private String nome;
 	
-	@OneToMany(mappedBy="tipo_documento")
+	@OneToMany(mappedBy="tipoDocumento")
 	private List<Documento> documentos;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -44,6 +44,16 @@ public class TipoDocumento implements Serializable {
 
 	public void setDocumentos(List<Documento> documentos) {
 		this.documentos = documentos;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s[id=%d]", getClass().getSimpleName(), getId());
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return (obj instanceof TipoDocumento) && (id != null) ? id.equals(((TipoDocumento) obj).id) : (obj == this);
 	}
 
 }

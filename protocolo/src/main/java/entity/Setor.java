@@ -36,11 +36,11 @@ public class Setor implements Serializable {
 	@OneToMany(mappedBy="setor")
 	private List<Funcionario> funcionarios;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

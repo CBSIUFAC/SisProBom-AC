@@ -1,11 +1,14 @@
 package entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,30 +16,34 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
 @Entity
 public class Documento implements Serializable {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int protocolo;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable=false)
-	private Date data;
+	private Date data = new Timestamp((new Date()).getTime());
 	@Column(nullable=false)
 	private String assunto;
 	@Column(nullable=false)
 	private String origem;
 	@Column(nullable=false)
-	private boolean arquivado;
-	@Column(nullable=false)
+	private boolean arquivado = false;
+	@Column
 	private String integra;
 	
 	@ManyToOne
-	@JoinColumn(referencedColumnName="id",name="protocolista",nullable=false)
-	private Usuario protocolista;
+	@JoinColumn(referencedColumnName="id",name="protocolista"/*,nullable=false*/)
+	private Funcionario protocolista;
 	
 	@ManyToOne
-	@JoinColumn(referencedColumnName="id",name="tipo_documento",nullable=false)
-	private TipoDocumento tipo_documento;
+	@JoinColumn(referencedColumnName="id",name="tipoDocumento",nullable=false)
+	private TipoDocumento tipoDocumento;
 	
 	@OneToMany(mappedBy="documento")
 	private List<Movimentacao> movimentacoes;
@@ -89,20 +96,20 @@ public class Documento implements Serializable {
 		this.integra = integra;
 	}
 
-	public Usuario getProtocolista() {
+	public Funcionario getProtocolista() {
 		return protocolista;
 	}
 
-	public void setProtocolista(Usuario protocolista) {
+	public void setProtocolista(Funcionario protocolista) {
 		this.protocolista = protocolista;
 	}
 
-	public TipoDocumento getTipo_documento() {
-		return tipo_documento;
+	public TipoDocumento getTipoDocumento() {
+		return tipoDocumento;
 	}
 
-	public void setTipo_documento(TipoDocumento tipo_documento) {
-		this.tipo_documento = tipo_documento;
+	public void setTipoDocumento(TipoDocumento tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
 	}
 
 	public List<Movimentacao> getMovimentacoes() {

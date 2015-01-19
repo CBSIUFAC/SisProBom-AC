@@ -28,9 +28,6 @@ public class Usuario implements Serializable {
 	@OneToOne
 	@JoinColumn(referencedColumnName="id",name="funcionario",nullable=false)
 	private Funcionario funcionario;
-	
-	@OneToMany(mappedBy="protocolista")
-	private List<Documento> documentos;
 
 	public int getId() {
 		return id;
@@ -70,14 +67,6 @@ public class Usuario implements Serializable {
 
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
-	}
-
-	public List<Documento> getDocumentos() {
-		return documentos;
-	}
-
-	public void setDocumentos(List<Documento> documentos) {
-		this.documentos = documentos;
 	}
 
 }

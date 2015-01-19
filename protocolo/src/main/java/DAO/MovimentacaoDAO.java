@@ -3,7 +3,6 @@ package DAO;
 import java.util.List;
 
 import entity.Movimentacao;
-import entity.Usuario;
 
 public class MovimentacaoDAO extends MasterDAO {
 	
@@ -27,4 +26,5 @@ public class MovimentacaoDAO extends MasterDAO {
 		return getLista("from Movimentacao m");
 		
 	}
+	
 }
