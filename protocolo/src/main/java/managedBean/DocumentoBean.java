@@ -1,18 +1,17 @@
 package managedBean;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 
-import org.hibernate.HibernateException;
 import org.hibernate.JDBCException;
-import org.hibernate.exception.DataException;
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 import DAO.DocumentoDAO;
 import entity.Documento;
@@ -23,7 +22,8 @@ public class DocumentoBean implements Serializable {
 	
 	private Documento documento;
 	private DocumentoDAO dao = new DocumentoDAO();
-	private List<Documento> listaDocumento = null;
+	private List<Documento> lista = null;
+	private List<Documento> filtro = null;
 	private Documento[] selecionados;
 	
 	public Documento getDocumento() {
@@ -36,37 +36,52 @@ public class DocumentoBean implements Serializable {
 		this.documento = documento;
 	}
 	
-	public void inserirDocumento() {
+	public void salvarDocumento() {
 		try {
-			dao.inserirDocumento(documento);
-			listaDocumento = null;
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Registro incluído com sucesso!");
-			FacesContext.getCurrentInstance().addMessage(null, msg);
+			String textoMsg = null;
+			if (documento.getProtocolo() == 0) {
+				dao.inserirDocumento(documento);
+				textoMsg = "Registro incluído com sucesso!";
+			} else {
+				dao.atualizarDocumento(documento);
+				textoMsg = "Registro alterado com sucesso!";
+				RequestContext.getCurrentInstance().execute("PF('dlgCadastro').hide()");
+				selecionados = null;
+			}
+			lista = null;
+			documento = null;
+			mensagem(textoMsg, FacesMessage.SEVERITY_INFO);
 		} catch (JDBCException e) {
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, null, e.getSQLException().getMessage());
-			FacesContext.getCurrentInstance().addMessage(null, msg);
+			mensagem(e.getSQLException().getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
-		//return "documento";
 	}
 	
-	public String deletarDocumento() {
-		dao.deletarDocumento(documento);
-		listaDocumento = null;
-		return "documento";
-	}
-	
-	public void deletarDocumentos(ActionEvent event) {
+	public void deletarDocumentos() {
 		if (selecionados.length > 0) {
-			for (Documento documento : selecionados) {
-				dao.deletarDocumento(documento);
+			try {
+				for (Documento documento : selecionados) {
+					dao.deletarDocumento(documento);
+				}
+				lista = null;
+				mensagem("Registro(s) removido(s) com sucesso!", FacesMessage.SEVERITY_INFO);
+			} catch (JDBCException e) {
+				mensagem(e.getSQLException().getMessage(), FacesMessage.SEVERITY_ERROR);
 			}
 		}
 	}
 	
-	public List<Documento> getListaDocumentos() {
-		if(listaDocumento == null)
-			listaDocumento = dao.getListaDocumento();
-		return listaDocumento;
+	public List<Documento> getLista() {
+		if(lista == null)
+			lista = dao.getListaDocumento();
+		return lista;
+	}
+	
+	public List<Documento> getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(List<Documento> filtro) {
+		this.filtro = filtro;
 	}
 
 	public Documento[] getSelecionados() {
@@ -75,6 +90,34 @@ public class DocumentoBean implements Serializable {
 
 	public void setSelecionados(Documento[] selecionados) {
 		this.selecionados = selecionados;
+	}
+	
+	public void preparaEdicao(SelectEvent e) {
+		documento = (Documento) e.getObject();
+	}
+	
+	public void cancelar() {
+		documento = null;
+	}
+	
+	public void arquivar() {
+		if (selecionados.length > 0) {
+			try {
+				for (Documento documento : selecionados) {
+					documento.setArquivado(true);
+					dao.atualizarDocumento(documento);
+				}
+				lista = null;
+				mensagem("Registro atualizado com sucesso!", FacesMessage.SEVERITY_INFO);
+			} catch (JDBCException e) {
+				mensagem(e.getSQLException().getMessage(), FacesMessage.SEVERITY_ERROR);
+			}
+		}
+	}
+	
+	public void mensagem(String msg, Severity s) {
+		FacesMessage facesMsg = new FacesMessage(s, null, msg);
+		FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 	}
 
 }

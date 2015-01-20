@@ -2,7 +2,7 @@
 
 .ui-widget,
 .ui-widget .ui-widget {
-	font-size: 95%;
+	font-size: 90%;
 }
 
 .ui-toolbar {
@@ -61,4 +61,17 @@
 
 .filterId {
 	width: 4em !important;
+}
+
+.ui-button-text {
+	font-size: 120%;
+}
+
+.ui-column-customfilter .ui-button-text {
+	line-height: 1.24em !important;
+	font-size: 110%;
+}
+
+.ui-column-customfilter .ui-selectcheckboxmenu-label-container {
+	line-height: 1.5em !important;
 }

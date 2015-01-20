@@ -51,6 +51,13 @@
 								update=":formLista:tbl">
 								<p:confirm header="Confirmação" message="Você deseja remover o(s) registro(s) selecionado(s)?" icon="ui-icon-alert" />
 							</p:commandButton>
+
+							<p:commandButton value="Arquivar"
+								action="#{documentoBean.arquivar}"
+								icon="ui-icon-circle-minus"
+								update=":formLista:tbl">
+								<p:confirm header="Confirmação" message="Você deseja arquivar o(s) documento(s) selecionado(s)?" icon="ui-icon-alert" />
+							</p:commandButton>
 								
 							<p:menuButton value="Exportar">
 							
@@ -72,13 +79,6 @@
 							
 							</p:menuButton>
 
-							<p:commandButton value="Arquivar"
-								action="#{documentoBean.arquivar}"
-								icon="ui-icon-circle-minus"
-								update=":formLista:tbl">
-								<p:confirm header="Confirmação" message="Você deseja arquivar o(s) documento(s) selecionado(s)?" icon="ui-icon-alert" />
-							</p:commandButton>
-
 						</f:facet>
 
 					</p:toolbar>
@@ -87,11 +87,11 @@
 		        
 		        <p:column selectionMode="multiple" />
 			
-			    <p:column headerText="Protocolo" filterBy="#{r.protocolo}" filterMatchMode="exact" sortBy="#{r.protocolo}">
+			    <p:column headerText="Protocolo" filterBy="#{r.protocolo}" filterMatchMode="exact" sortBy="#{r.protocolo}" width="110">
 			        <h:outputText value="#{r.protocolo}" />
 			    </p:column>
 			 
-			    <p:column headerText="Data/Hora" filterBy="#{r.data}" filterMatchMode="startsWith" sortBy="#{r.data}">
+			    <p:column headerText="Data/Hora" filterBy="#{r.data}" filterMatchMode="startsWith" sortBy="#{r.data}" width="130">
 			        <h:outputText value="#{r.data}" />
 			    </p:column>
 			    
@@ -99,21 +99,21 @@
 			    	<h:outputText value="#{r.assunto}" />
 			    </p:column>
 			    
-			    <p:column headerText="Origem" filterBy="#{r.origem}" filterMatchMode="contains" sortBy="#{r.origem}">
+			    <p:column headerText="Origem" filterBy="#{r.origem}" filterMatchMode="contains" sortBy="#{r.origem}" width="160">
 			    	<h:outputText value="#{r.origem}" />
 			    </p:column>
 			    
-			    <p:column headerText="Arquivado" filterBy="#{r.arquivado}" filterMatchMode="exact" sortBy="#{r.arquivado}">
+			    <p:column headerText="Arquivado" filterBy="#{r.arquivado}" filterMatchMode="exact" sortBy="#{r.arquivado}" width="85">
 			    	<f:facet name="filter">
 			    		<p:selectBooleanButton offLabel="Não" onLabel="Sim" onchange="PF('tabelaLista').filter()" />
 			    	</f:facet>
 			    	<h:outputText value="#{r.arquivado ? 'Sim' : 'Não'}" />
 			    </p:column>
 			    
-			    <p:column headerText="Tipo" filterBy="#{r.tipoDocumento.nome}" filterMatchMode="in" sortBy="#{r.tipoDocumento.nome}">
+			    <p:column headerText="Tipo" filterBy="#{r.tipoDocumento.nome}" filterMatchMode="in" sortBy="#{r.tipoDocumento.nome}" width="120">
 			    	<f:facet name="filter">
 			    		<p:selectCheckboxMenu value="#{tipoDocumentoBean.filtro}" label="Tipos" onchange="PF('tabelaLista').filter()">
-			    			<f:selectItems value="#{tipoDocumentoBean.lista}" var="tipoDocumento" itemLabel="#{tipoDocumento.nome}" itemValue="#{tipoDocumento}" />
+			    			<f:selectItems value="#{tipoDocumentoBean.lista}" var="tipoDocumento" itemLabel="#{tipoDocumento.nome}" itemValue="#{tipoDocumento.nome}" />
 			    		</p:selectCheckboxMenu>
 			    	</f:facet>
 			    	<h:outputText value="#{r.tipoDocumento.nome}" />
