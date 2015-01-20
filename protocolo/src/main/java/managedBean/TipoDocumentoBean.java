@@ -38,7 +38,7 @@ public class TipoDocumentoBean implements Serializable {
 	public void salvarTipoDocumento() {
 		try {
 			String textoMsg = null;
-			if (tipoDocumento.getId() == 0) {
+			if (tipoDocumento.getId() == null) {
 				dao.inserirTipoDocumento(tipoDocumento);
 				textoMsg = "Registro incluído com sucesso!";
 			} else {
