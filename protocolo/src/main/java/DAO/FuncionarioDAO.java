@@ -18,8 +18,8 @@ public class FuncionarioDAO extends MasterDAO {
 		atualizarObjeto(funcionario);
 	}
 	
-	public Funcionario getFuncionario(int Matricula) {
-		return getObjeto(Funcionario.class, Matricula);
+	public Funcionario getFuncionario(int id) {
+		return getObjeto(Funcionario.class, id);
 	}
 	
 	public List<Funcionario> getListaFuncionario() {
