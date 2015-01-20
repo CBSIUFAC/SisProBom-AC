@@ -38,7 +38,7 @@ public class SetorBean implements Serializable {
 	public void salvarSetor() {
 		try {
 			String textoMsg = null;
-			if (setor.getId() == 0) {
+			if (setor.getId() == null) {
 				dao.inserirSetor(setor);
 				textoMsg = "Registro incluído com sucesso!";
 			} else {
