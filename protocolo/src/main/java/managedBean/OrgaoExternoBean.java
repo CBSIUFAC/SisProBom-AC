@@ -25,7 +25,16 @@ public class OrgaoExternoBean implements Serializable {
 	private List<OrgaoExterno> lista = null;
 	private List<OrgaoExterno> filtro = null;
 	private OrgaoExterno[] selecionados;
+	private int tipoSetor;
 	
+	public int getTipoSetor() {
+		return tipoSetor;
+	}
+
+	public void setTipoSetor(int tipoSetor) {
+		this.tipoSetor = tipoSetor;
+	}
+
 	public OrgaoExterno getOrgao() {
 		if(orgao == null)
 			orgao = new OrgaoExterno();
