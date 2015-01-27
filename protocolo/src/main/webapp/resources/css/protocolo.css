@@ -1,7 +1,10 @@
 @CHARSET "ISO-8859-1";
 
-.ui-widget,
-.ui-widget .ui-widget {
+body {
+	padding: 0.25em;
+}
+
+.ui-widget, .ui-widget .ui-widget {
 	font-size: 90%;
 }
 
@@ -11,7 +14,7 @@
 }
 
 .ui-selection-column {
-	width: 1.17em;
+	width: 1.3em;
 }
 
 .ui-inputfield {
@@ -56,11 +59,11 @@
 }
 
 .columnId {
-	width: 4.5em !important;
+	width: 6.5em !important;
 }
 
 .filterId {
-	width: 4em !important;
+	width: 6em !important;
 }
 
 .ui-button-text {
@@ -74,4 +77,16 @@
 
 .ui-column-customfilter .ui-selectcheckboxmenu-label-container {
 	line-height: 1.5em !important;
+}
+
+.ui-layout-west .ui-menu {
+	width: 95% !important;
+}
+
+.ui-layout-center .ui-layout-unit-content {
+	padding: 0 !important;
+}
+
+.ui-layout-west .ui-menuitem-text {
+	font-size: 120%;
 }

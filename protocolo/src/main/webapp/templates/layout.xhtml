@@ -14,10 +14,16 @@
 
 	<p:layout fullPage="true">
 	
+		<p:layoutUnit position="north">
+			<h:outputText value="SisProBom - Sistema de Protocolo do CBMAC" style="font-size: 150%; font-weight: bold;" />
+		</p:layoutUnit>
+	
+		<p:layoutUnit position="west" size="200" header="Menu" collapsible="true">
+			<ui:include src="/templates/menu.xhtml" />
+		</p:layoutUnit>
+	
 		<p:layoutUnit position="center">
-		
 			<ui:insert name="conteudo">Conteúdo</ui:insert>
-		
 		</p:layoutUnit>
 	
 	</p:layout>

@@ -56,7 +56,7 @@
 								action="#{documentoBean.arquivar}"
 								icon="ui-icon-circle-minus"
 								update=":formLista:tbl">
-								<p:confirm header="Confirmação" message="Você deseja arquivar o(s) documento(s) selecionado(s)?" icon="ui-icon-alert" />
+								<p:confirm header="Confirmação" message="Você deseja arquivar o(s) documento(s) selecionado(s)?" icon="ui-icon-folder-collapsed" />
 							</p:commandButton>
 								
 							<p:menuButton value="Exportar">
@@ -87,12 +87,14 @@
 		        
 		        <p:column selectionMode="multiple" />
 			
-			    <p:column headerText="Protocolo" filterBy="#{r.protocolo}" filterMatchMode="exact" sortBy="#{r.protocolo}" width="110">
+			    <p:column headerText="Protocolo" styleClass="columnId" filterBy="#{r.protocolo}" filterMatchMode="exact" filterStyleClass="filterId" sortBy="#{r.protocolo}">
 			        <h:outputText value="#{r.protocolo}" />
 			    </p:column>
 			 
-			    <p:column headerText="Data/Hora" filterBy="#{r.data}" filterMatchMode="startsWith" sortBy="#{r.data}" width="130">
-			        <h:outputText value="#{r.data}" />
+			    <p:column headerText="Data/Hora" filterBy="#{r.data}" filterMatchMode="startsWith" sortBy="#{r.data}" width="120">
+			        <h:outputText value="#{r.data}">
+			        	<f:convertDateTime locale="pt_BR" type="both" />
+			        </h:outputText>
 			    </p:column>
 			    
 			    <p:column headerText="Assunto" filterBy="#{r.assunto}" filterMatchMode="contains" sortBy="#{r.assunto}">
@@ -138,7 +140,7 @@
 					<p:outputLabel value="Origem:" />
 					<p:inputText id="origem" value="#{documentoBean.documento.origem}" required="true" />
 					<p:outputLabel value="Tipo:"/>
-					<p:selectOneMenu value="#{documentoBean.documento.tipoDocumento}" converter="omnifaces.SelectItemsConverter"  >
+					<p:selectOneMenu value="#{documentoBean.documento.tipoDocumento}" converter="omnifaces.SelectItemsConverter">
 						<f:selectItems value="#{tipoDocumentoBean.lista}" var="tipoDocumento" itemLabel="#{tipoDocumento.nome}" itemValue="#{tipoDocumento}" />
 					</p:selectOneMenu>
 					
