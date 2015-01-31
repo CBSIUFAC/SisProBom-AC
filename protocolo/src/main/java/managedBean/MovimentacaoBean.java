@@ -1,18 +1,16 @@
 package managedBean;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 
-import org.hibernate.HibernateException;
 import org.hibernate.JDBCException;
-import org.hibernate.exception.DataException;
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 import DAO.MovimentacaoDAO;
 import entity.Movimentacao;
@@ -23,7 +21,8 @@ public class MovimentacaoBean implements Serializable {
 	
 	private Movimentacao movimentacao;
 	private MovimentacaoDAO dao = new MovimentacaoDAO();
-	private List<Movimentacao> listaMovimentacao = null;
+	private List<Movimentacao> lista = null;
+	private List<Movimentacao> filtro = null;
 	private Movimentacao[] selecionados;
 	
 	public Movimentacao getMovimentacao() {
@@ -36,37 +35,59 @@ public class MovimentacaoBean implements Serializable {
 		this.movimentacao = movimentacao;
 	}
 	
-	public void inserirMovimentacao() {
+	public void salvarMovimentacao() {
 		try {
+			String textoMsg = null;
 			dao.inserirMovimentacao(movimentacao);
-			listaMovimentacao = null;
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Registro incluído com sucesso!");
+			textoMsg = "Registro incluído com sucesso!";
+			RequestContext.getCurrentInstance().execute("PF('dlgCadastro').hide()");
+//			if (movimentacao.getId() == 0) {
+//				dao.inserirMovimentacao(movimentacao);
+//				textoMsg = "Registro incluído com sucesso!";
+//			} else {
+//				dao.atualizarMovimentacao(movimentacao);
+//				textoMsg = "Registro alterado com sucesso!";
+//				RequestContext.getCurrentInstance().execute("PF('dlgCadastro').hide()");
+//				selecionados = null;
+//			}
+			lista = null;
+			movimentacao = null;
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, textoMsg);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		} catch (JDBCException e) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, null, e.getSQLException().getMessage());
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
-		//return "Movimentacao";
 	}
 	
-	public String deletarMovimentacao() {
-		dao.deletarMovimentacao(movimentacao);
-		listaMovimentacao = null;
-		return "movimentacao";
+//	public void deletarMovimentacoes() {
+//		if (selecionados.length > 0) {
+//			try {
+//				for (Movimentacao movimentacao : selecionados) {
+//					dao.deletarMovimentacao(movimentacao);
+//				}
+//				lista = null;
+//				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Registro removido com sucesso!");
+//				FacesContext.getCurrentInstance().addMessage(null, msg);
+//			} catch (JDBCException e) {
+//				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, null, e.getSQLException().getMessage());
+//				FacesContext.getCurrentInstance().addMessage(null, msg);
+//			}
+//		}
+//	}
+	
+	public List<Movimentacao> getLista() {
+		if(lista == null)
+			lista = dao.getListaMovimentacao();
+		return lista;
 	}
 	
-	public void deletarMovimentacoes(ActionEvent event) {
-		if (selecionados.length > 0) {
-			for (Movimentacao movimentacoes : selecionados) {
-				dao.deletarMovimentacao(movimentacao);
-			}
-		}
+	public List<Movimentacao> getFiltro() {
+		return filtro;
 	}
-	
-	public List<Movimentacao> getListaMovimentacoes() {
-		if(listaMovimentacao == null)
-			listaMovimentacao = dao.getListaMovimentacao();
-		return listaMovimentacao;
+
+	public void setFiltro(List<Movimentacao> filtro) {
+		this.filtro = filtro;
 	}
 
 	public Movimentacao[] getSelecionados() {
@@ -75,6 +96,14 @@ public class MovimentacaoBean implements Serializable {
 
 	public void setSelecionados(Movimentacao[] selecionados) {
 		this.selecionados = selecionados;
+	}
+	
+	public void preparaEdicao(SelectEvent e) {
+		movimentacao = (Movimentacao) e.getObject();
+	}
+	
+	public void cancelar() {
+		movimentacao = null;
 	}
 
 }

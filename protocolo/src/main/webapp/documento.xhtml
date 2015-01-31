@@ -51,6 +51,10 @@
 								update=":formLista:tbl">
 								<p:confirm header="Confirmação" message="Você deseja remover o(s) registro(s) selecionado(s)?" icon="ui-icon-alert" />
 							</p:commandButton>
+							
+							<p:commandButton value="Movimentar"
+								action="#{documentoBean.movimentar}"
+								icon="ui-icon-transferthick-e-w" />
 
 							<p:commandButton value="Arquivar"
 								action="#{documentoBean.arquivar}"

@@ -10,11 +10,9 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.hibernate.JDBCException;
-import org.omnifaces.util.Ajax;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
-import antlr.collections.impl.LList;
 import DAO.DocumentoDAO;
 import entity.Documento;
 import entity.Orgao;
@@ -118,6 +116,24 @@ public class DocumentoBean implements Serializable {
 	public void cancelar() {
 		documento = null;
 		listaOrigem = null;
+	}
+	
+	public String movimentar() {
+		String textoMsg = null;
+		if (selecionados != null) {
+			if (selecionados.length > 1) {
+				textoMsg = "Selecione somente 1 (um) documento.";
+			} else if (selecionados.length == 0) {
+				textoMsg = "Selecione ao menos 1 (um) documento.";
+			} else {
+				documento = selecionados[0];
+				return "movimentacao";
+			}
+		} else {
+			textoMsg = "Selecione ao menos 1 (um) documento.";
+		}
+		mensagem(textoMsg, FacesMessage.SEVERITY_ERROR);
+		return "documento";
 	}
 	
 	public void arquivar() {
