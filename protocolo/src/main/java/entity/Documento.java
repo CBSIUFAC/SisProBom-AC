@@ -16,9 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
-
 @Entity
 public class Documento implements Serializable {
 	
@@ -30,8 +27,10 @@ public class Documento implements Serializable {
 	private Date data = new Timestamp((new Date()).getTime());
 	@Column(nullable=false)
 	private String assunto;
+	//@Column(nullable=false)
+	//private boolean origem = true; // True - 'interno', False - 'externo'
 	@Column(nullable=false)
-	private String origem;
+	private boolean interno = true;
 	@Column(nullable=false)
 	private boolean arquivado = false;
 	@Column
@@ -45,8 +44,21 @@ public class Documento implements Serializable {
 	@JoinColumn(referencedColumnName="id",name="tipoDocumento",nullable=false)
 	private TipoDocumento tipoDocumento;
 	
+//	@ManyToOne
+//	@JoinColumn(referencedColumnName="id",name="origemInterna")
+//	private Setor origemInterna;
+//	
+//	@ManyToOne
+//	@JoinColumn(referencedColumnName="id",name="origemExterna")
+//	private OrgaoExterno origemExterna;
+	
+	@ManyToOne
+	@JoinColumn(referencedColumnName="id",name="origem")
+	private Orgao origem;
+
 	@OneToMany(mappedBy="documento")
 	private List<Movimentacao> movimentacoes;
+	
 
 	public int getProtocolo() {
 		return protocolo;
@@ -72,12 +84,20 @@ public class Documento implements Serializable {
 		this.assunto = assunto;
 	}
 
-	public String getOrigem() {
-		return origem;
+//	public boolean isOrigem() {
+//		return arquivado;
+//	}
+//
+//	public void setOrigem(boolean origem) {
+//		this.origem = origem;
+//	}
+
+	public boolean isInterno() {
+		return interno;
 	}
 
-	public void setOrigem(String origem) {
-		this.origem = origem;
+	public void setInterno(boolean interno) {
+		this.interno = interno;
 	}
 
 	public boolean isArquivado() {
@@ -110,6 +130,30 @@ public class Documento implements Serializable {
 
 	public void setTipoDocumento(TipoDocumento tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
+	}
+
+//	public Setor getOrigemInterna() {
+//		return origemInterna;
+//	}
+//
+//	public void setOrigemInterna(Setor origemInterna) {
+//		this.origemInterna = origemInterna;
+//	}
+//
+//	public OrgaoExterno getOrigemExterna() {
+//		return origemExterna;
+//	}
+//
+//	public void setOrigemExterna(OrgaoExterno origemExterna) {
+//		this.origemExterna = origemExterna;
+//	}
+	
+	public Orgao getOrigem() {
+		return origem;
+	}
+
+	public void setOrigem(Orgao origem) {
+		this.origem = origem;
 	}
 
 	public List<Movimentacao> getMovimentacoes() {

@@ -101,8 +101,15 @@
 			    	<h:outputText value="#{r.assunto}" />
 			    </p:column>
 			    
-			    <p:column headerText="Origem" filterBy="#{r.origem}" filterMatchMode="contains" sortBy="#{r.origem}" width="160">
-			    	<h:outputText value="#{r.origem}" />
+			    <p:column headerText="Interno/Externo" filterBy="#{r.interno}" filterMatchMode="exact" sortBy="#{r.interno}" width="85">
+			    	<f:facet name="filter">
+			    		<p:selectBooleanButton offLabel="Externo" onLabel="Interno" onchange="PF('tabelaLista').filter()" />
+			    	</f:facet>
+			    	<h:outputText value="#{r.interno ? 'Interno' : 'Externo'}" />
+			    </p:column>
+			    
+			    <p:column headerText="Origem" filterBy="#{r.origem.nome}" filterMatchMode="contains" sortBy="#{r.origem.nome}" width="85">
+			    	<h:outputText value="#{r.origem.nome}" />
 			    </p:column>
 			    
 			    <p:column headerText="Arquivado" filterBy="#{r.arquivado}" filterMatchMode="exact" sortBy="#{r.arquivado}" width="85">
@@ -136,35 +143,31 @@
 				<p:panelGrid columns="2">
 				
 					<p:outputLabel value="Assunto:" />
-					<p:inputText id="assunto" value="#{documentoBean.documento.assunto}" required="true" immediate="true" />
+					<p:inputText id="assunto" value="#{documentoBean.documento.assunto}" required="true" />
 					<p:outputLabel value="Origem:"/>
-					<p:selectOneRadio id="selecao" value="#{orgaoExternoBean.tipoSetor}">
-           				<f:selectItem itemLabel="Origem Interna" itemValue="1" />
-            			<f:selectItem itemLabel="Origem Externa" itemValue="2" />
-            			<p:ajax event="change" update="orgaoExternoSelect orgaoInternoSelect" process="@this" immediate="true" />
-            		</p:selectOneRadio>
-										
-				<p:outputLabel value="Origem Interna:" />
-				<p:selectOneMenu id="orgaoInternoSelect" value="#{funcionarioBean.funcionario.setor}" converter="omnifaces.SelectItemsConverter" disabled="#{orgaoExternoBean.tipoSetor != 1}">
-						<f:selectItems value="#{setorBean.lista}" var="setor" itemLabel="#{setor.nome}" itemValue="#{setor}" />
-				</p:selectOneMenu>
-				<p:outputLabel value="Origem Externa:" />
-				<p:selectOneMenu id="orgaoExternoSelect" value="#{orgaoExternoBean.orgao.nome}" converter="omnifaces.SelectItemsConverter" disabled="#{orgaoExternoBean.tipoSetor != 2}" >
-						<f:selectItems value="#{orgaoExternoBean.lista}" var="orgao" itemLabel="#{orgao.nome}" itemValue="#{orgao}" />
-				</p:selectOneMenu>
-					
-				
+						<h:panelGroup>
+							<p:selectOneMenu value="#{documentoBean.documento.interno}" styleClass="selectInternoExterno">
+								<f:selectItem itemLabel="Interna" itemValue="true" />
+								<f:selectItem itemLabel="Externa" itemValue="false" />
+								<p:ajax listener="#{documentoBean.selecionaOrigem}" update="origem" />
+							</p:selectOneMenu>
+							<p:selectOneMenu id="origem" value="#{documentoBean.documento.origem}" converter="omnifaces.SelectItemsConverter" styleClass="selectOrigem">
+								<f:selectItems value="#{documentoBean.listaOrigem}" var="origem" itemLabel="#{origem.nome}" itemValue="#{origem}" />
+							</p:selectOneMenu>
+						</h:panelGroup>
 					<p:outputLabel value="Tipo:"/>
 					<p:selectOneMenu value="#{documentoBean.documento.tipoDocumento}" converter="omnifaces.SelectItemsConverter">
 						<f:selectItems value="#{tipoDocumentoBean.lista}" var="tipoDocumento" itemLabel="#{tipoDocumento.nome}" itemValue="#{tipoDocumento}" />
 					</p:selectOneMenu>
 					
 					<f:facet name="footer">
+						
 						<p:commandButton value="Salvar" action="#{documentoBean.salvarDocumento}" update=":formLista:tbl :formCadastro" styleClass="botaoForm" icon="ui-icon-check" />
 						<p:commandButton value="Limpar" type="reset" styleClass="botaoForm" icon="ui-icon-arrowreturnthick-1-w" />
 						<p:commandButton value="Cancelar" action="#{documentoBean.cancelar}" process="@this" update=":formCadastro" oncomplete="PF('dlgCadastro').hide()" styleClass="botaoForm" icon="ui-icon-cancel">
 							<p:resetInput target="@form" />
 						</p:commandButton>
+						
 					</f:facet>
 					
 				</p:panelGrid>

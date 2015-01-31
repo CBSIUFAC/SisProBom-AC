@@ -90,3 +90,7 @@ body {
 .ui-layout-west .ui-menuitem-text {
 	font-size: 120%;
 }
+
+.selectInternoExterno {
+	margin-right: 1em;
+}

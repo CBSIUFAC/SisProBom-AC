@@ -13,7 +13,7 @@
   <mapping class="entity.Documento"/>
   <mapping class="entity.Funcionario"/>
   <mapping class="entity.Movimentacao"/>
-  <mapping class="entity.Setor"/>
+  <mapping class="entity.Orgao"/>
   <mapping class="entity.TipoDocumento"/>
   <mapping class="entity.Usuario"/>
  </session-factory>

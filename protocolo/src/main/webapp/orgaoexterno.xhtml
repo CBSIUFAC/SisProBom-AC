@@ -5,7 +5,7 @@
      xmlns:ui="http://java.sun.com/jsf/facelets"
      xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="titulo">Orgão Externo</ui:define>
+	<ui:define name="titulo">Orgãos Externos</ui:define>
 	
 	<ui:define name="conteudo">
 	
@@ -15,27 +15,27 @@
 
 			<p:dataTable id="tbl"
 						 var="r"
-						 value="#{orgaoExternoBean.lista}"
+						 value="#{orgaoBean.listaExterno}"
 						 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						 currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords}"
 		                 paginator="true"
 		                 rows="10"
 		                 rowsPerPageTemplate="10,20,30"
 		                 rowKey="#{r.id}"
-		                 selection="#{orgaoExternoBean.selecionados}"
-		                 filteredValue="#{orgaoExternoBean.filtro}">
+		                 selection="#{orgaoBean.selecionados}"
+		                 filteredValue="#{orgaoBean.filtro}">
 		        
 		        <p:ajax event="rowDblselect"
 		        	oncomplete="PF('dlgCadastro').show()"
 		        	update=":formCadastro"
-		        	listener="#{orgaoExternoBean.preparaEdicao}" />
+		        	listener="#{orgaoBean.preparaEdicao}" />
 
 				<f:facet name="header">
 
 					<p:toolbar>
 
 						<f:facet name="left">
-							<h:outputText value="Orgão Externo" />
+							<h:outputText value="Orgãos Externos" />
 						</f:facet>
 
 						<f:facet name="right">
@@ -45,7 +45,7 @@
 								icon="ui-icon-circle-plus" />
 
 							<p:commandButton value="Remover"
-								action="#{orgaoExternoBean.deletarOrgao}"
+								action="#{orgaoBean.deletarOrgaos}"
 								icon="ui-icon-circle-minus"
 								update=":formLista:tbl">
 								<p:confirm header="Confirmação" message="Você deseja remover o(s) registro(s) selecionado(s)?" icon="ui-icon-alert" />
@@ -54,19 +54,19 @@
 							<p:menuButton value="Exportar">
 							
 								<p:menuitem value="Excel (XLS)" ajax="false">
-									<p:dataExporter type="xls" target="tbl" fileName="Orgao Externos" />
+									<p:dataExporter type="xls" target="tbl" fileName="orgaoexternos" />
 								</p:menuitem>
 							
 								<p:menuitem value="PDF" ajax="false">
-									<p:dataExporter type="pdf" target="tbl" fileName="Orgao Externos" />
+									<p:dataExporter type="pdf" target="tbl" fileName="orgaoexternos" />
 								</p:menuitem>
 							
 								<p:menuitem value="CSV" ajax="false">
-									<p:dataExporter type="csv" target="tbl" fileName="Orgao Externos" />
+									<p:dataExporter type="csv" target="tbl" fileName="orgaoexternos" />
 								</p:menuitem>
 							
 								<p:menuitem value="XML" ajax="false">
-									<p:dataExporter type="xml" target="tbl" fileName="Orgao Externos" />
+									<p:dataExporter type="xml" target="tbl" fileName="orgaoexternos" />
 								</p:menuitem>
 							
 							</p:menuButton>
@@ -101,11 +101,11 @@
 			<h:form id="formCadastro">
 				<p:panelGrid columns="2">
 					<p:outputLabel value="Nome:" />
-					<p:inputText id="nome" value="#{orgaoExternoBean.orgao.nome}" required="true" />
+					<p:inputText id="nome" value="#{orgaoBean.orgao.nome}" required="true" />
 					<f:facet name="footer">
-						<p:commandButton value="Salvar" action="#{orgaoExternoBean.salvarOrgao}" update=":formLista:tbl :formCadastro" styleClass="botaoForm" icon="ui-icon-check" />
+						<p:commandButton value="Salvar" action="#{orgaoBean.salvarOrgaoExterno}" update=":formLista:tbl :formCadastro" styleClass="botaoForm" icon="ui-icon-check" />
 						<p:commandButton value="Limpar" type="reset" styleClass="botaoForm" icon="ui-icon-arrowreturnthick-1-w" />
-						<p:commandButton value="Cancelar" action="#{orgaoExternoBean.cancelar}" process="@this" update=":formCadastro" oncomplete="PF('dlgCadastro').hide()" styleClass="botaoForm" icon="ui-icon-cancel">
+						<p:commandButton value="Cancelar" action="#{orgaoBean.cancelar}" process="@this" update=":formCadastro" oncomplete="PF('dlgCadastro').hide()" styleClass="botaoForm" icon="ui-icon-cancel">
 							<p:resetInput target="@form" />
 						</p:commandButton>
 					</f:facet>

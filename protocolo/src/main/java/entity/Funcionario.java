@@ -24,7 +24,7 @@ public class Funcionario implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(referencedColumnName="id",name="setor")
-	private Setor setor;
+	private Orgao setor;
 	
 	@OneToOne(mappedBy="funcionario")
 	private Usuario usuario;
@@ -54,11 +54,11 @@ public class Funcionario implements Serializable {
 		this.matricula = matricula;
 	}
 
-	public Setor getSetor() {
+	public Orgao getSetor() {
 		return setor;
 	}
 
-	public void setSetor(Setor setor) {
+	public void setSetor(Orgao setor) {
 		this.setor = setor;
 	}
 

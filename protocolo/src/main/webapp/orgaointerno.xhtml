@@ -5,7 +5,7 @@
      xmlns:ui="http://java.sun.com/jsf/facelets"
      xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="titulo">Funcionários</ui:define>
+	<ui:define name="titulo">Setores Internos</ui:define>
 	
 	<ui:define name="conteudo">
 	
@@ -15,27 +15,27 @@
 
 			<p:dataTable id="tbl"
 						 var="r"
-						 value="#{funcionarioBean.lista}"
+						 value="#{orgaoBean.listaInterno}"
 						 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						 currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords}"
 		                 paginator="true"
 		                 rows="10"
 		                 rowsPerPageTemplate="10,20,30"
 		                 rowKey="#{r.id}"
-		                 selection="#{funcionarioBean.selecionados}"
-		                 filteredValue="#{funcionarioBean.filtro}">
+		                 selection="#{orgaoBean.selecionados}"
+		                 filteredValue="#{orgaoBean.filtro}">
 		        
 		        <p:ajax event="rowDblselect"
 		        	oncomplete="PF('dlgCadastro').show()"
 		        	update=":formCadastro"
-		        	listener="#{funcionarioBean.preparaEdicao}" />
+		        	listener="#{orgaoBean.preparaEdicao}" />
 
 				<f:facet name="header">
 
 					<p:toolbar>
 
 						<f:facet name="left">
-							<h:outputText value="Funcionários" />
+							<h:outputText value="Setores Internos" />
 						</f:facet>
 
 						<f:facet name="right">
@@ -45,7 +45,7 @@
 								icon="ui-icon-circle-plus" />
 
 							<p:commandButton value="Remover"
-								action="#{funcionarioBean.deletarFuncionarios}"
+								action="#{orgaoBean.deletarOrgaos}"
 								icon="ui-icon-circle-minus"
 								update=":formLista:tbl">
 								<p:confirm header="Confirmação" message="Você deseja remover o(s) registro(s) selecionado(s)?" icon="ui-icon-alert" />
@@ -54,19 +54,19 @@
 							<p:menuButton value="Exportar">
 							
 								<p:menuitem value="Excel (XLS)" ajax="false">
-									<p:dataExporter type="xls" target="tbl" fileName="funcionarios" />
+									<p:dataExporter type="xls" target="tbl" fileName="setores" />
 								</p:menuitem>
 							
 								<p:menuitem value="PDF" ajax="false">
-									<p:dataExporter type="pdf" target="tbl" fileName="funcionarios" />
+									<p:dataExporter type="pdf" target="tbl" fileName="setores" />
 								</p:menuitem>
 							
 								<p:menuitem value="CSV" ajax="false">
-									<p:dataExporter type="csv" target="tbl" fileName="funcionarios" />
+									<p:dataExporter type="csv" target="tbl" fileName="setores" />
 								</p:menuitem>
 							
 								<p:menuitem value="XML" ajax="false">
-									<p:dataExporter type="xml" target="tbl" fileName="funcionarios" />
+									<p:dataExporter type="xml" target="tbl" fileName="setores" />
 								</p:menuitem>
 							
 							</p:menuButton>
@@ -87,14 +87,6 @@
 			        <h:outputText value="#{r.nome}" />
 			    </p:column>
 			    
-			    <p:column headerText="Matrícula" filterBy="#{r.matricula}" filterMatchMode="exact" sortBy="#{r.matricula}">
-			    	<h:outputText value="#{r.matricula}" />
-			    </p:column>
-			    
-			    <p:column headerText="Setor" filterBy="#{r.setor.nome}" filterMatchMode="contains" sortBy="#{r.setor.nome}">
-			    	<h:outputText value="#{r.setor.nome}" />
-			    </p:column>
-			    
 			</p:dataTable>
 			
 			<p:confirmDialog global="true" closeOnEscape="true">
@@ -104,28 +96,19 @@
 			
 		</h:form>
 		
-		<p:dialog id="dlgCadastro" header="Cadastro de Funcionário" widgetVar="dlgCadastro" modal="true" resizable="false"
+		<p:dialog id="dlgCadastro" header="Cadastro de Setor" widgetVar="dlgCadastro" modal="true" resizable="false"
 				  width="400" appendTo="@(body)">
 			<h:form id="formCadastro">
 				<p:panelGrid columns="2">
-				
 					<p:outputLabel value="Nome:" />
-					<p:inputText id="nome" value="#{funcionarioBean.funcionario.nome}" required="true" />
-					<p:outputLabel value="Matrícula:" />
-					<p:inputText id="matricula" value="#{funcionarioBean.funcionario.matricula}" required="true" />
-					<p:outputLabel value="Setor:"/>
-					<p:selectOneMenu value="#{funcionarioBean.funcionario.setor}" converter="omnifaces.SelectItemsConverter"  >
-						<f:selectItems value="#{orgaoBean.listaInterno}" var="setor" itemLabel="#{setor.nome}" itemValue="#{setor}" />
-					</p:selectOneMenu>
-					
+					<p:inputText id="nome" value="#{orgaoBean.orgao.nome}" required="true" />
 					<f:facet name="footer">
-						<p:commandButton value="Salvar" action="#{funcionarioBean.salvarFuncionario}" update=":formLista:tbl :formCadastro" styleClass="botaoForm" icon="ui-icon-check" />
+						<p:commandButton value="Salvar" action="#{orgaoBean.salvarOrgaoInterno}" update=":formLista:tbl :formCadastro" styleClass="botaoForm" icon="ui-icon-check" />
 						<p:commandButton value="Limpar" type="reset" styleClass="botaoForm" icon="ui-icon-arrowreturnthick-1-w" />
-						<p:commandButton value="Cancelar" action="#{funcionarioBean.cancelar}" process="@this" update=":formCadastro" oncomplete="PF('dlgCadastro').hide()" styleClass="botaoForm" icon="ui-icon-cancel">
+						<p:commandButton value="Cancelar" action="#{orgaoBean.cancelar}" process="@this" update=":formCadastro" oncomplete="PF('dlgCadastro').hide()" styleClass="botaoForm" icon="ui-icon-cancel">
 							<p:resetInput target="@form" />
 						</p:commandButton>
 					</f:facet>
-					
 				</p:panelGrid>
 			</h:form>
 		</p:dialog>

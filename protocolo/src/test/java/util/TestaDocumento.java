@@ -6,7 +6,6 @@ import com.lowagie.text.Document;
 
 import entity.Documento;
 import entity.Funcionario;
-import entity.Setor;
 import DAO.DocumentoDAO;
 import DAO.FuncionarioDAO;
 import DAO.TipoDocumentoDAO;
@@ -22,7 +21,7 @@ public class TestaDocumento {
 		//Inserir
 		Documento d1 = new Documento();
 		d1.setAssunto("Teste 2");
-		d1.setOrigem("Órgão interno");
+		//d1.setOrigem("Órgão interno");
 		d1.setProtocolista(daoFuncionario.getFuncionario(1));
 		d1.setTipoDocumento(daoTipoDocumento.getTipoDocumento(1));
 		dao.inserirDocumento(d1);

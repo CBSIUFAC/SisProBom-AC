@@ -10,11 +10,14 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.hibernate.JDBCException;
+import org.omnifaces.util.Ajax;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
+import antlr.collections.impl.LList;
 import DAO.DocumentoDAO;
 import entity.Documento;
+import entity.Orgao;
 
 @ManagedBean(name="documentoBean")
 @SessionScoped
@@ -25,6 +28,9 @@ public class DocumentoBean implements Serializable {
 	private List<Documento> lista = null;
 	private List<Documento> filtro = null;
 	private Documento[] selecionados;
+	
+	private OrgaoBean orgaoBean = new OrgaoBean();
+	private List<Orgao> listaOrigem = null;
 	
 	public Documento getDocumento() {
 		if(documento == null)
@@ -50,6 +56,7 @@ public class DocumentoBean implements Serializable {
 			}
 			lista = null;
 			documento = null;
+			setListaOrigem(null);
 			mensagem(textoMsg, FacesMessage.SEVERITY_INFO);
 		} catch (JDBCException e) {
 			mensagem(e.getSQLException().getMessage(), FacesMessage.SEVERITY_ERROR);
@@ -91,13 +98,26 @@ public class DocumentoBean implements Serializable {
 	public void setSelecionados(Documento[] selecionados) {
 		this.selecionados = selecionados;
 	}
+
+	public List<Orgao> getListaOrigem() {
+		if (listaOrigem == null) {
+			listaOrigem = orgaoBean.getListaInterno();
+		}
+		return listaOrigem;
+	}
+
+	public void setListaOrigem(List<Orgao> listaOrigem) {
+		this.listaOrigem = listaOrigem;
+	}
 	
 	public void preparaEdicao(SelectEvent e) {
 		documento = (Documento) e.getObject();
+		selecionaOrigem();
 	}
 	
 	public void cancelar() {
 		documento = null;
+		listaOrigem = null;
 	}
 	
 	public void arquivar() {
@@ -112,6 +132,14 @@ public class DocumentoBean implements Serializable {
 			} catch (JDBCException e) {
 				mensagem(e.getSQLException().getMessage(), FacesMessage.SEVERITY_ERROR);
 			}
+		}
+	}
+	
+	public void selecionaOrigem() {
+		if (documento.isInterno()) {
+			setListaOrigem(orgaoBean.getListaInterno());
+		} else {
+			setListaOrigem(orgaoBean.getListaExterno());
 		}
 	}
 	

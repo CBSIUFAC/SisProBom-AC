@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -21,13 +22,13 @@ public class Movimentacao implements Serializable {
 	private int id;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable=false)
-	private Date data_movimentacao;
+	private Date dataMovimentacao = new Timestamp((new Date()).getTime());
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column
+	private Date dataRecebimento;
 	@Column(nullable=false)
-	private Date data_recebimento;
-	@Column(nullable=false)
-	private boolean recebido;
-	@Column(nullable=false)
+	private boolean recebido = false;
+	@Column
 	private String despacho;
 	
 	@ManyToOne
@@ -35,8 +36,8 @@ public class Movimentacao implements Serializable {
 	private Documento documento;
 	
 	@ManyToOne
-	@JoinColumn(referencedColumnName="id",name="setor",nullable=false)
-	private Setor setor_destino;
+	@JoinColumn(referencedColumnName="id",name="setorDestino",nullable=false)
+	private Orgao setorDestino;
 
 	public int getId() {
 		return id;
@@ -47,19 +48,19 @@ public class Movimentacao implements Serializable {
 	}
 
 	public Date getData_movimentacao() {
-		return data_movimentacao;
+		return dataMovimentacao;
 	}
 
-	public void setData_movimentacao(Date data_movimentacao) {
-		this.data_movimentacao = data_movimentacao;
+	public void setData_movimentacao(Date dataMovimentacao) {
+		this.dataMovimentacao = dataMovimentacao;
 	}
 
-	public Date getData_recebimento() {
-		return data_recebimento;
+	public Date getDataRecebimento() {
+		return dataRecebimento;
 	}
 
-	public void setData_recebimento(Date data_recebimento) {
-		this.data_recebimento = data_recebimento;
+	public void setDataRecebimento(Date dataRecebimento) {
+		this.dataRecebimento = dataRecebimento;
 	}
 
 	public boolean isRecebido() {
@@ -86,12 +87,12 @@ public class Movimentacao implements Serializable {
 		this.documento = documento;
 	}
 
-	public Setor getSetor_destino() {
-		return setor_destino;
+	public Orgao getSetorDestino() {
+		return setorDestino;
 	}
 
-	public void setSetor_destino(Setor setor_destino) {
-		this.setor_destino = setor_destino;
+	public void setSetor_destino(Orgao setorDestino) {
+		this.setorDestino = setorDestino;
 	}
 	
 }
