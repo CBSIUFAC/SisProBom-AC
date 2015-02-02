@@ -117,6 +117,10 @@
 					<p:selectOneMenu value="#{funcionarioBean.funcionario.setor}" converter="omnifaces.SelectItemsConverter"  >
 						<f:selectItems value="#{orgaoBean.listaInterno}" var="setor" itemLabel="#{setor.siglaNome}" itemValue="#{setor}" />
 					</p:selectOneMenu>
+					<p:outputLabel value="Usuario:"/>
+					<p:selectOneMenu value="#{funcionarioBean.funcionario.usuario}" converter="omnifaces.SelectItemsConverter"  >
+						<f:selectItems value="#{usuarioBean.lista}" var="usuario" itemLabel="#{usuario.username}" itemValue="#{usuario}" />
+					</p:selectOneMenu>
 					
 					<f:facet name="footer">
 						<p:commandButton value="Salvar" action="#{funcionarioBean.salvarFuncionario}" update=":formLista:tbl :formCadastro" styleClass="botaoForm" icon="ui-icon-check" />
