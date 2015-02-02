@@ -116,3 +116,7 @@ body {
 	font-weight: bold !important;
 	padding-left: .25em;
 }
+
+.ui-growl {
+	left: 2%;
+}
