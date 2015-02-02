@@ -91,8 +91,8 @@
 			    	<h:outputText value="#{r.matricula}" />
 			    </p:column>
 			    
-			    <p:column headerText="Setor" filterBy="#{r.setor.nome}" filterMatchMode="contains" sortBy="#{r.setor.nome}">
-			    	<h:outputText value="#{r.setor.nome}" />
+			    <p:column headerText="Setor" filterBy="#{r.setor.siglaNome}" filterMatchMode="contains" sortBy="#{r.setor.siglaNome}">
+			    	<h:outputText value="#{r.setor.siglaNome}" />
 			    </p:column>
 			    
 			</p:dataTable>
@@ -115,7 +115,7 @@
 					<p:inputText id="matricula" value="#{funcionarioBean.funcionario.matricula}" required="true" />
 					<p:outputLabel value="Setor:"/>
 					<p:selectOneMenu value="#{funcionarioBean.funcionario.setor}" converter="omnifaces.SelectItemsConverter"  >
-						<f:selectItems value="#{orgaoBean.listaInterno}" var="setor" itemLabel="#{setor.nome}" itemValue="#{setor}" />
+						<f:selectItems value="#{orgaoBean.listaInterno}" var="setor" itemLabel="#{setor.siglaNome}" itemValue="#{setor}" />
 					</p:selectOneMenu>
 					
 					<f:facet name="footer">

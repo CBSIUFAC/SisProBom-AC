@@ -18,6 +18,8 @@ public class Orgao implements Serializable {
 	private Integer id;
 	@Column(nullable=false)
 	private String nome;
+	@Column(length=20)
+	private String sigla;
 	@Column(nullable=false)
 	private boolean interno;
 	
@@ -44,6 +46,14 @@ public class Orgao implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getSigla() {
+		return sigla;
+	}
+
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
 	}
 
 	public boolean isInterno() {
@@ -76,6 +86,10 @@ public class Orgao implements Serializable {
 
 	public void setDocumentos(List<Documento> documentos) {
 		this.documentos = documentos;
+	}
+	
+	public String getSiglaNome() {
+		return (sigla != null) ? sigla + " - " + nome : nome;
 	}
 	
 	@Override

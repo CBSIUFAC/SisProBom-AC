@@ -91,7 +91,7 @@
 						<p:outputLabel value="Origem:" />
 					</p:column>
 					<p:column>
-						<h:outputText value="#{documentoBean.documento.origem.nome} (#{documentoBean.documento.interno ? 'Interno' : 'Externo'})" />
+						<h:outputText value="#{documentoBean.documento.origem.siglaNome} (#{documentoBean.documento.interno ? 'Interno' : 'Externo'})" />
 					</p:column>
 					
 					<p:column styleClass="panelGridLabel">
@@ -116,8 +116,8 @@
 						        </h:outputText>
 						    </p:column>
 					        
-					        <p:column headerText="Destino" width="120">
-						        <h:outputText value="#{r.setorDestino.nome}" />
+					        <p:column headerText="Destino" width="150">
+						        <h:outputText value="#{r.setorDestino.siglaNome}" />
 						    </p:column>
 						    
 						    <p:column headerText="Despacho">
@@ -148,7 +148,7 @@
 				
 					<p:outputLabel value="Destino:"/>
 					<p:selectOneMenu value="#{movimentacaoBean.movimentacao.setorDestino}" converter="omnifaces.SelectItemsConverter"  >
-						<f:selectItems value="#{orgaoBean.listaInterno}" var="setorDestino" itemLabel="#{setorDestino.nome}" itemValue="#{setorDestino}" />
+						<f:selectItems value="#{orgaoBean.listaInterno}" var="setorDestino" itemLabel="#{setorDestino.siglaNome}" itemValue="#{setorDestino}" />
 					</p:selectOneMenu>
 					<p:outputLabel value="Despacho:" />
 					<h:panelGroup>

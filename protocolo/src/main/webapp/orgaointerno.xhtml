@@ -87,6 +87,10 @@
 			        <h:outputText value="#{r.nome}" />
 			    </p:column>
 			    
+			    <p:column headerText="Sigla" filterBy="#{r.sigla}" filterMatchMode="contains" sortBy="#{r.sigla}">
+			        <h:outputText value="#{r.sigla}" />
+			    </p:column>
+			    
 			</p:dataTable>
 			
 			<p:confirmDialog global="true" closeOnEscape="true">
@@ -102,6 +106,8 @@
 				<p:panelGrid columns="2">
 					<p:outputLabel value="Nome:" />
 					<p:inputText id="nome" value="#{orgaoBean.orgao.nome}" required="true" />
+					<p:outputLabel value="Sigla:" />
+					<p:inputText id="sigla" value="#{orgaoBean.orgao.sigla}" />
 					<f:facet name="footer">
 						<p:commandButton value="Salvar" action="#{orgaoBean.salvarOrgaoInterno}" update=":formLista:tbl :formCadastro" styleClass="botaoForm" icon="ui-icon-check" />
 						<p:commandButton value="Limpar" type="reset" styleClass="botaoForm" icon="ui-icon-arrowreturnthick-1-w" />
