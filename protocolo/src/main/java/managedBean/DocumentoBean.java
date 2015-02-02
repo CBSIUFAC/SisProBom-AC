@@ -144,6 +144,23 @@ public class DocumentoBean implements Serializable {
 					dao.atualizarDocumento(documento);
 				}
 				lista = null;
+				selecionados = null;
+				mensagem("Registro atualizado com sucesso!", FacesMessage.SEVERITY_INFO);
+			} catch (JDBCException e) {
+				mensagem(e.getSQLException().getMessage(), FacesMessage.SEVERITY_ERROR);
+			}
+		}
+	}
+	
+	public void desarquivar() {
+		if (selecionados.length > 0) {
+			try {
+				for (Documento documento : selecionados) {
+					documento.setArquivado(false);
+					dao.atualizarDocumento(documento);
+				}
+				lista = null;
+				selecionados = null;
 				mensagem("Registro atualizado com sucesso!", FacesMessage.SEVERITY_INFO);
 			} catch (JDBCException e) {
 				mensagem(e.getSQLException().getMessage(), FacesMessage.SEVERITY_ERROR);

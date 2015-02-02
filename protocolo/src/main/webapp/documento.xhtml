@@ -55,13 +55,14 @@
 							<p:commandButton value="Movimentar"
 								action="#{documentoBean.movimentar}"
 								icon="ui-icon-transferthick-e-w" />
-
-							<p:commandButton value="Arquivar"
-								action="#{documentoBean.arquivar}"
-								icon="ui-icon-circle-minus"
-								update=":formLista:tbl">
-								<p:confirm header="Confirmação" message="Você deseja arquivar o(s) documento(s) selecionado(s)?" icon="ui-icon-folder-collapsed" />
-							</p:commandButton>
+								
+							<p:menuButton value="Arquivamento">
+							
+								<p:menuitem value="Arquivar" action="#{documentoBean.arquivar}" update=":formLista:tbl" icon="ui-icon-folder-collapsed" />
+							
+								<p:menuitem value="Reverter arquivamento" action="#{documentoBean.desarquivar}" update=":formLista:tbl" icon="ui-icon-folder-open" />
+							
+							</p:menuButton>
 								
 							<p:menuButton value="Exportar">
 							
@@ -117,8 +118,8 @@
 			    	<h:outputText value="#{r.interno ? 'Interno' : 'Externo'}" />
 			    </p:column>
 			    
-			    <p:column headerText="Origem" filterBy="#{r.origem.nome}" filterMatchMode="contains" sortBy="#{r.origem.nome}" width="120">
-			    	<h:outputText value="#{r.origem.nome}" />
+			    <p:column headerText="Origem" filterBy="#{r.origem.siglaNome}" filterMatchMode="contains" sortBy="#{r.origem.siglaNome}" width="150">
+			    	<h:outputText value="#{r.origem.siglaNome}" />
 			    </p:column>
 			    
 			    <p:column headerText="Arquivado" filterBy="#{r.arquivado}" filterMatchMode="equals" sortBy="#{r.arquivado}" width="85">
@@ -160,7 +161,7 @@
 							<p:ajax listener="#{documentoBean.selecionaOrigem}" update="origem" />
 						</p:selectOneMenu>
 						<p:selectOneMenu id="origem" value="#{documentoBean.documento.origem}" converter="omnifaces.SelectItemsConverter" styleClass="selectOrigem">
-							<f:selectItems value="#{documentoBean.listaOrigem}" var="origem" itemLabel="#{origem.nome}" itemValue="#{origem}" />
+							<f:selectItems value="#{documentoBean.listaOrigem}" var="origem" itemLabel="#{origem.siglaNome}" itemValue="#{origem}" />
 						</p:selectOneMenu>
 					</h:panelGroup>
 					<p:outputLabel value="Tipo:"/>
