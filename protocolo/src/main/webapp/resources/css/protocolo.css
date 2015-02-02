@@ -94,3 +94,25 @@ body {
 .selectInternoExterno {
 	margin-right: 1em;
 }
+
+.noPadding {
+	padding: 0 !important;
+}
+
+.panelGridLabel {
+	font-weight: bold;
+	width: 0;
+}
+
+.brasaoCentro {
+	left: 50%;
+	margin: -219px;
+	position: absolute;
+	top: 50%;
+}
+
+.tituloSistema {
+	font-size: 250% !important;
+	font-weight: bold !important;
+	padding-left: .25em;
+}
