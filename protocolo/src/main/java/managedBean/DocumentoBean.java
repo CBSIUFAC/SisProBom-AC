@@ -122,15 +122,15 @@ public class DocumentoBean implements Serializable {
 		String textoMsg = null;
 		if (selecionados != null) {
 			if (selecionados.length > 1) {
-				textoMsg = "Selecione somente 1 (um) documento.";
+				textoMsg = "Selecione somente 1 documento.";
 			} else if (selecionados.length == 0) {
-				textoMsg = "Selecione ao menos 1 (um) documento.";
+				textoMsg = "Selecione um documento.";
 			} else {
 				documento = selecionados[0];
 				return "movimentacao";
 			}
 		} else {
-			textoMsg = "Selecione ao menos 1 (um) documento.";
+			textoMsg = "Selecione um documento.";
 		}
 		mensagem(textoMsg, FacesMessage.SEVERITY_ERROR);
 		return "documento";

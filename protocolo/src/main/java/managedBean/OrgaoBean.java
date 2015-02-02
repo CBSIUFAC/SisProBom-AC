@@ -96,13 +96,13 @@ public class OrgaoBean implements Serializable {
 	}
 	
 	public List<Orgao> getListaInterno() {
-		if(listaInterno == null)
+		if (listaInterno == null)
 			listaInterno = dao.getListaOrgaoInterno();
 		return listaInterno;
 	}
 	
 	public List<Orgao> getListaExterno() {
-		if(listaExterno == null)
+		if (listaExterno == null)
 			listaExterno = dao.getListaOrgaoExterno();
 		return listaExterno;
 	}

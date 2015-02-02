@@ -47,11 +47,11 @@ public class Movimentacao implements Serializable {
 		this.id = id;
 	}
 
-	public Date getData_movimentacao() {
+	public Date getDataMovimentacao() {
 		return dataMovimentacao;
 	}
 
-	public void setData_movimentacao(Date dataMovimentacao) {
+	public void setDataMovimentacao(Date dataMovimentacao) {
 		this.dataMovimentacao = dataMovimentacao;
 	}
 
@@ -91,7 +91,7 @@ public class Movimentacao implements Serializable {
 		return setorDestino;
 	}
 
-	public void setSetor_destino(Orgao setorDestino) {
+	public void setSetorDestino(Orgao setorDestino) {
 		this.setorDestino = setorDestino;
 	}
 	

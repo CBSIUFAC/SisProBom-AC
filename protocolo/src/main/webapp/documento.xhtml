@@ -89,7 +89,7 @@
 
 				</f:facet>
 		        
-		        <p:column selectionMode="multiple" />
+		        <p:column selectionMode="multiple" exportable="false" />
 			
 			    <p:column headerText="Protocolo" styleClass="columnId" filterBy="#{r.protocolo}" filterMatchMode="exact" filterStyleClass="filterId" sortBy="#{r.protocolo}">
 			        <h:outputText value="#{r.protocolo}" />
@@ -105,30 +105,34 @@
 			    	<h:outputText value="#{r.assunto}" />
 			    </p:column>
 			    
-			    <p:column headerText="Interno/Externo" filterBy="#{r.interno}" filterMatchMode="exact" sortBy="#{r.interno}" width="85">
+			    <p:column headerText="Interno/Externo" filterBy="#{r.interno}" filterMatchMode="equals" sortBy="#{r.interno}" width="120">
 			    	<f:facet name="filter">
-			    		<p:selectBooleanButton offLabel="Externo" onLabel="Interno" onchange="PF('tabelaLista').filter()" />
+			    		<p:selectOneMenu onchange="PF('tabelaLista').filter()">
+			    			<f:converter converterId="javax.faces.Boolean" />
+			    			<f:selectItem itemLabel="Todos" itemValue="" />
+			    			<f:selectItem itemLabel="Internos" itemValue="true" />
+			    			<f:selectItem itemLabel="Externos" itemValue="false" />
+			    		</p:selectOneMenu>
 			    	</f:facet>
 			    	<h:outputText value="#{r.interno ? 'Interno' : 'Externo'}" />
 			    </p:column>
 			    
-			    <p:column headerText="Origem" filterBy="#{r.origem.nome}" filterMatchMode="contains" sortBy="#{r.origem.nome}" width="85">
+			    <p:column headerText="Origem" filterBy="#{r.origem.nome}" filterMatchMode="contains" sortBy="#{r.origem.nome}" width="120">
 			    	<h:outputText value="#{r.origem.nome}" />
 			    </p:column>
 			    
-			    <p:column headerText="Arquivado" filterBy="#{r.arquivado}" filterMatchMode="exact" sortBy="#{r.arquivado}" width="85">
+			    <p:column headerText="Arquivado" filterBy="#{r.arquivado}" filterMatchMode="equals" sortBy="#{r.arquivado}" width="85">
 			    	<f:facet name="filter">
-			    		<p:selectBooleanButton offLabel="Não" onLabel="Sim" onchange="PF('tabelaLista').filter()" />
+			    		<p:selectOneMenu onchange="PF('tabelaLista').filter()">
+			    			<f:converter converterId="javax.faces.Boolean" />
+			    			<f:selectItem itemLabel="Não" itemValue="false" />
+			    			<f:selectItem itemLabel="Sim" itemValue="true"  />
+			    		</p:selectOneMenu>
 			    	</f:facet>
 			    	<h:outputText value="#{r.arquivado ? 'Sim' : 'Não'}" />
 			    </p:column>
 			    
-			    <p:column headerText="Tipo" filterBy="#{r.tipoDocumento.nome}" filterMatchMode="in" sortBy="#{r.tipoDocumento.nome}" width="120">
-			    	<f:facet name="filter">
-			    		<p:selectCheckboxMenu value="#{tipoDocumentoBean.filtro}" label="Tipos" onchange="PF('tabelaLista').filter()">
-			    			<f:selectItems value="#{tipoDocumentoBean.lista}" var="tipoDocumento" itemLabel="#{tipoDocumento.nome}" itemValue="#{tipoDocumento.nome}" />
-			    		</p:selectCheckboxMenu>
-			    	</f:facet>
+			    <p:column headerText="Tipo" filterBy="#{r.tipoDocumento.nome}" filterMatchMode="contains" sortBy="#{r.tipoDocumento.nome}" width="120">
 			    	<h:outputText value="#{r.tipoDocumento.nome}" />
 			    </p:column>
 			    
@@ -149,16 +153,16 @@
 					<p:outputLabel value="Assunto:" />
 					<p:inputText id="assunto" value="#{documentoBean.documento.assunto}" required="true" />
 					<p:outputLabel value="Origem:"/>
-						<h:panelGroup>
-							<p:selectOneMenu value="#{documentoBean.documento.interno}" styleClass="selectInternoExterno">
-								<f:selectItem itemLabel="Interna" itemValue="true" />
-								<f:selectItem itemLabel="Externa" itemValue="false" />
-								<p:ajax listener="#{documentoBean.selecionaOrigem}" update="origem" />
-							</p:selectOneMenu>
-							<p:selectOneMenu id="origem" value="#{documentoBean.documento.origem}" converter="omnifaces.SelectItemsConverter" styleClass="selectOrigem">
-								<f:selectItems value="#{documentoBean.listaOrigem}" var="origem" itemLabel="#{origem.nome}" itemValue="#{origem}" />
-							</p:selectOneMenu>
-						</h:panelGroup>
+					<h:panelGroup>
+						<p:selectOneMenu value="#{documentoBean.documento.interno}" styleClass="selectInternoExterno">
+							<f:selectItem itemLabel="Interna" itemValue="true" />
+							<f:selectItem itemLabel="Externa" itemValue="false" />
+							<p:ajax listener="#{documentoBean.selecionaOrigem}" update="origem" />
+						</p:selectOneMenu>
+						<p:selectOneMenu id="origem" value="#{documentoBean.documento.origem}" converter="omnifaces.SelectItemsConverter" styleClass="selectOrigem">
+							<f:selectItems value="#{documentoBean.listaOrigem}" var="origem" itemLabel="#{origem.nome}" itemValue="#{origem}" />
+						</p:selectOneMenu>
+					</h:panelGroup>
 					<p:outputLabel value="Tipo:"/>
 					<p:selectOneMenu value="#{documentoBean.documento.tipoDocumento}" converter="omnifaces.SelectItemsConverter">
 						<f:selectItems value="#{tipoDocumentoBean.lista}" var="tipoDocumento" itemLabel="#{tipoDocumento.nome}" itemValue="#{tipoDocumento}" />

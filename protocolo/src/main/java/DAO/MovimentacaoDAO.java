@@ -2,6 +2,7 @@ package DAO;
 
 import java.util.List;
 
+import entity.Documento;
 import entity.Movimentacao;
 
 public class MovimentacaoDAO extends MasterDAO {
@@ -24,6 +25,11 @@ public class MovimentacaoDAO extends MasterDAO {
 	
 	public List<Movimentacao> getListaMovimentacao() {
 		return getLista("from Movimentacao m");
+		
+	}
+	
+	public List<Movimentacao> getListaMovimentacao(Documento documento) {
+		return getLista("from Movimentacao m where m.documento = " + documento.getProtocolo());
 		
 	}
 	
