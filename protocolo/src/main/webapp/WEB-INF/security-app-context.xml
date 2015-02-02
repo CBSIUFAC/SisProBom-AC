@@ -15,6 +15,7 @@
 		<intercept-url pattern="/OrgaoInterno.jsf" access="isAuthenticated()" />
 		<intercept-url pattern="/tipodocumento.jsf" access="isAuthenticated()" />
 		<intercept-url pattern="/movimentacao.jsf" access="isAuthenticated()" />
+		<intercept-url pattern="/login.jsf" access="permitAll" />
 		<intercept-url pattern="/usuarios.jsf" access="hasAnyRole('1')" />
 		<form-login login-page="/login.jsf" default-target-url="/documento.jsf"
 			authentication-failure-url="/error.jsf" />
