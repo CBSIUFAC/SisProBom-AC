@@ -1,15 +1,12 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -24,10 +21,14 @@ public class Usuario implements Serializable {
 	private String senha;
 	@Column(nullable=false)
 	private int perfil;
+	@Column(nullable=false)
+	private boolean ativo = true;
 	
 	@OneToOne
 	@JoinColumn(referencedColumnName="id",name="funcionario",nullable=false)
 	private Funcionario funcionario;
+	/*@OneToOne(mappedBy="usuario")
+	private Funcionario funcionario;*/
 
 	public int getId() {
 		return id;
@@ -59,6 +60,14 @@ public class Usuario implements Serializable {
 
 	public void setPerfil(int perfil) {
 		this.perfil = perfil;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	public Funcionario getFuncionario() {

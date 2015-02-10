@@ -27,8 +27,6 @@ public class Documento implements Serializable {
 	private Date data = new Timestamp((new Date()).getTime());
 	@Column(nullable=false)
 	private String assunto;
-	//@Column(nullable=false)
-	//private boolean origem = true; // True - 'interno', False - 'externo'
 	@Column(nullable=false)
 	private boolean interno = true;
 	@Column(nullable=false)
@@ -43,14 +41,6 @@ public class Documento implements Serializable {
 	@ManyToOne
 	@JoinColumn(referencedColumnName="id",name="tipoDocumento",nullable=false)
 	private TipoDocumento tipoDocumento;
-	
-//	@ManyToOne
-//	@JoinColumn(referencedColumnName="id",name="origemInterna")
-//	private Setor origemInterna;
-//	
-//	@ManyToOne
-//	@JoinColumn(referencedColumnName="id",name="origemExterna")
-//	private OrgaoExterno origemExterna;
 	
 	@ManyToOne
 	@JoinColumn(referencedColumnName="id",name="origem")

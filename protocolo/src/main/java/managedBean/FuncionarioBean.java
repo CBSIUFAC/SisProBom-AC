@@ -38,7 +38,7 @@ public class FuncionarioBean implements Serializable {
 	public void salvarFuncionario() {
 		try {
 			String textoMsg = null;
-			if (funcionario.getId() == 0) {
+			if (funcionario.getId() == null) {
 				dao.inserirFuncionario(funcionario);
 				textoMsg = "Registro incluído com sucesso!";
 			} else {

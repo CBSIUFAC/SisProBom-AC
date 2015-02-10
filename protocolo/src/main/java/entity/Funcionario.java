@@ -16,7 +16,7 @@ public class Funcionario implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	@Column(nullable=false)
 	private String nome;
 	@Column(nullable=false)
@@ -27,14 +27,16 @@ public class Funcionario implements Serializable {
 	private Orgao setor;
 	
 	@OneToOne(mappedBy="funcionario")
+	/*@OneToOne
+	@JoinColumn(referencedColumnName ="id",name="usuario")*/
 	private Usuario usuario;
 
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
@@ -68,6 +70,16 @@ public class Funcionario implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s[id=%d]", getClass().getSimpleName(), getId());
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return (obj instanceof Funcionario) && (id != null) ? id.equals(((Funcionario) obj).id) : (obj == this);
 	}
 	
 }

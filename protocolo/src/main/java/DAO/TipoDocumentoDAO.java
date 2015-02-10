@@ -27,6 +27,5 @@ public class TipoDocumentoDAO extends MasterDAO {
 	public List<TipoDocumento> getListaTipoDocumento() {
 		return getLista("from TipoDocumento s");
 	}
-	//
 	
 }

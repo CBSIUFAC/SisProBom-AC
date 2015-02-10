@@ -13,13 +13,13 @@
 		<form id="formLogin" method="post" action="j_spring_security_check">
 			<p:panelGrid id="panelLogin" columns="3" style="margin-bottom:10px">
 				<h:outputLabel value="Username:" />
-				<p:inputText id="j_username" required="true"
+				<p:inputText id="j_nome" required="true"
 					requiredMessage="Usuário é obrigatório" />
-				<p:message for="j_username" />
+				<p:message for="j_nome" />
 				<h:outputLabel value="Password: " />
-				<p:password id="j_password" required="true"
+				<p:password id="j_senha" required="true"
 					requiredMessage="Senha é obrigatória" />
-				<p:message for="j_password" />
+				<p:message for="j_senha" />
 				<h:commandButton value="Login" type="submit"/>
 			</p:panelGrid>
 		</form>

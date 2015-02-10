@@ -83,12 +83,20 @@
 			        <h:outputText value="#{r.id}" />
 			    </p:column>
 			     
-			     <p:column headerText="Username" filterBy="#{r.username}" filterMatchMode="contains" sortBy="#{r.username}">
-			        <h:outputText value="#{r.username}" />
+			     <p:column headerText="Usuário" filterBy="#{r.nome}" filterMatchMode="contains" sortBy="#{r.nome}">
+			        <h:outputText value="#{r.nome}" />
 			    </p:column> 
 						    
 			    <p:column headerText="Perfil" filterBy="#{r.perfil}" filterMatchMode="contains" sortBy="#{r.perfil}">
-			    	<h:outputText value="#{r.perfil}" />
+			    	<h:outputText value="#{r.perfil == 1 ? 'Admin' : 'Usuário comum'}" />
+			    </p:column>
+			    
+			    <p:column headerText="Funcionário" filterBy="#{r.funcionario.nome}" filterMatchMode="contains" sortBy="#{r.funcionario.nome}">
+			    	<h:outputText value="#{r.funcionario.nome}" />
+			    </p:column>
+			    
+			     <p:column headerText="Matrícula" filterBy="#{r.funcionario.matricula}" filterMatchMode="exact" sortBy="#{r.funcionario.matricula}">
+			    	<h:outputText value="#{r.funcionario.matricula}" />
 			    </p:column>
 			 
 			    
@@ -106,20 +114,24 @@
 			<h:form id="formCadastro">
 				<p:panelGrid columns="2">
 				
-					<p:outputLabel value="UserName:" />
-					<p:inputText id="username" value="#{usuarioBean.usuario.username}" required="true" />
+					<p:outputLabel value="Funcionário:"/>
+					<p:selectOneMenu id="funcionario" value="#{usuarioBean.usuario.funcionario}" converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="" noSelectionOption="true" />
+						<f:selectItems value="#{funcionarioBean.lista}" var="f" itemLabel="#{f.matricula} - #{f.nome}" itemValue="#{f}" />
+					</p:selectOneMenu>
+					<p:outputLabel value="Nome:" />
+					<p:inputText id="nome" value="#{usuarioBean.usuario.nome}" required="true" />
 					<p:outputLabel value="Senha:" />
-					<p:inputText id="Senha" value="#{usuarioBean.usuario.senha}" required="true" />
+					<p:password id="senha" value="#{usuarioBean.usuario.senha}" required="true" />
 					<p:outputLabel value="Perfil:"/>
-					<p:selectOneMenu id="permissao" value="#{usuarioBean.usuario.perfil}">
-						<f:selectItem itemLabel="Selecione a Permissão" itemDisabled="true" />
+					<p:selectOneMenu id="perfil" value="#{usuarioBean.usuario.perfil}">
 						<f:selectItem itemLabel="Admin" itemValue="1" />
 						<f:selectItem itemLabel="Usuario" itemValue="2" />
 					</p:selectOneMenu>
+					<p:outputLabel value="Ativo:" />
 					<p:selectOneMenu id="ativo" value="#{usuarioBean.usuario.ativo}">
-					<f:selectItem itemLabel="Selecione" itemDisabled="true"/>
-					<f:selectItem itemLabel="Ativo" itemValue="true"/>
-					<f:selectItem itemLabel="Inativo" itemValue="false"/>
+					<f:selectItem itemLabel="Sim" itemValue="true"/>
+					<f:selectItem itemLabel="Não" itemValue="false"/>
 				</p:selectOneMenu>
 						   
 										
