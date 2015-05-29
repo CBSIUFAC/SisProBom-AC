@@ -23,15 +23,21 @@
 		<intercept-url pattern="/OrgaoInterno.jsf" access="isAuthenticated()" />
 		<intercept-url pattern="/tipodocumento.jsf" access="isAuthenticated()" />
 		<intercept-url pattern="/movimentacao.jsf" access="isAuthenticated()" />
+<<<<<<< HEAD
 >>>>>>> branch 'master' of https://github.com/CBSIUFAC/SisProBom-AC.git
+=======
+>>>>>>> refs/remotes/origin/master
 		<intercept-url pattern="/index.jsf" access="isAuthenticated()" />
 		<intercept-url pattern="/login.jsf" access="permitAll" />
+<<<<<<< HEAD
 <<<<<<< HEAD
 		<intercept-url pattern="/usuarios.jsf" access="hasAnyRole('1')" />
 		<form-login login-page="/login.jsf" default-target-url="/index.jsf"
 			authentication-failure-url="/login.jsf" />
 		<logout logout-success-url="/login.jsf" />
 =======
+=======
+>>>>>>> refs/remotes/origin/master
 		<intercept-url pattern="/usuarios.jsf" access="permitAll" />
 		<form-login login-page="/login.jsf" default-target-url="/documento.jsf"
 			authentication-failure-url="/error.jsf" />

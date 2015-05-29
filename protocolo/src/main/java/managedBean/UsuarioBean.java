@@ -5,7 +5,10 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> refs/remotes/origin/master
 import java.sql.SQLException;
 >>>>>>> branch 'master' of https://github.com/CBSIUFAC/SisProBom-AC.git
 import java.util.List;
@@ -20,7 +23,10 @@ import org.hibernate.JDBCException;
 <<<<<<< HEAD
 =======
 import org.hibernate.exception.DataException;
+<<<<<<< HEAD
 >>>>>>> branch 'master' of https://github.com/CBSIUFAC/SisProBom-AC.git
+=======
+>>>>>>> refs/remotes/origin/master
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
@@ -36,9 +42,12 @@ public class UsuarioBean implements Serializable {
 	private UsuarioDAO dao = new UsuarioDAO();
 	private List<Usuario> lista = null;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private List<Usuario> filtro = null;
 =======
 >>>>>>> branch 'master' of https://github.com/CBSIUFAC/SisProBom-AC.git
+=======
+>>>>>>> refs/remotes/origin/master
 	private Usuario[] selecionados;
 	private List<Usuario> filtro = null;
 	
@@ -55,18 +64,26 @@ public class UsuarioBean implements Serializable {
 	
 	public void salvarUsuario() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	
 >>>>>>> branch 'master' of https://github.com/CBSIUFAC/SisProBom-AC.git
+=======
+	
+>>>>>>> refs/remotes/origin/master
 		try {
 			String textoMsg = null;
 			if (usuario.getId() == 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 				String senha = usuario.getSenha();
 				usuario.setSenha(criptografarSenha(senha));
 =======
 				usuario.setSenha(criptografarSenha(usuario.getSenha()));
 >>>>>>> branch 'master' of https://github.com/CBSIUFAC/SisProBom-AC.git
+=======
+				usuario.setSenha(criptografarSenha(usuario.getSenha()));
+>>>>>>> refs/remotes/origin/master
 				dao.inserirUsuario(usuario);
 				textoMsg = "Registro incluído com sucesso!";
 			} else {
@@ -133,6 +150,9 @@ public class UsuarioBean implements Serializable {
 	
 	private String senhaCriptografada;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> refs/remotes/origin/master
 
 	public String criptografarSenha(String senha){
 		String sc = "";
@@ -141,6 +161,7 @@ public class UsuarioBean implements Serializable {
 			byte messageDigest[] = algorithm.digest(senha.getBytes("UTF-8"));
 			StringBuilder hexString = new StringBuilder();
 			for (byte b : messageDigest) {
+<<<<<<< HEAD
 				hexString.append(String.format("%02x", b));
 			}
 			sc = hexString.toString();
@@ -187,3 +208,24 @@ public class UsuarioBean implements Serializable {
 	}
 
 }
+=======
+			  hexString.append(String.format("%02x", b));
+			}
+			sc = hexString.toString();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return sc;
+	}
+	//mudança
+	public String getSenhaCriptografada() {
+		return senhaCriptografada;
+	}
+	public void setSenhaCriptografada(String senhaCriptografada) {
+		this.senhaCriptografada = senhaCriptografada;
+	}
+
+}
+>>>>>>> refs/remotes/origin/master
