@@ -9,8 +9,8 @@ import org.hibernate.exception.DataException;
 
 import util.HibernateUtil;
 
-public class MasterDAO {
-	
+public class MasterDAO implements Serializable {
+
 	public Session getSession() {
 		return HibernateUtil.getSessionFactory().openSession();
 	}
