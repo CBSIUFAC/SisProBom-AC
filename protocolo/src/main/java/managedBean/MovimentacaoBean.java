@@ -22,6 +22,11 @@ import entity.Movimentacao;
 @SessionScoped
 public class MovimentacaoBean implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3789720623197933270L;
+	
 	private Movimentacao movimentacao;
 	private MovimentacaoDAO dao = new MovimentacaoDAO();
 	private List<Movimentacao> lista = null;

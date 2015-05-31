@@ -14,6 +14,11 @@ import javax.persistence.OneToOne;
 @Entity
 public class Funcionario implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -531353145906089133L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;

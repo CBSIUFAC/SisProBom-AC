@@ -19,6 +19,11 @@ import javax.persistence.TemporalType;
 @Entity
 public class Documento implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2238403775443958685L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int protocolo;

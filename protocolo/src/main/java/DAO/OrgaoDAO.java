@@ -8,6 +8,11 @@ import entity.Orgao;
 
 public class OrgaoDAO extends MasterDAO {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1327934062328530452L;
+
 	public void inserirOrgao(Orgao orgao) throws DataException {
 		inserirObjeto(orgao);
 	}

@@ -17,6 +17,11 @@ import javax.persistence.TemporalType;
 @Entity
 public class Movimentacao implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1259206225017233043L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;

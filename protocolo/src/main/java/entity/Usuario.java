@@ -12,6 +12,11 @@ import javax.persistence.OneToOne;
 @Entity
 public class Usuario implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8202747089857954459L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
@@ -27,8 +32,6 @@ public class Usuario implements Serializable {
 	@OneToOne
 	@JoinColumn(referencedColumnName="id",name="funcionario",nullable=false)
 	private Funcionario funcionario;
-	/*@OneToOne(mappedBy="usuario")
-	private Funcionario funcionario;*/
 
 	public int getId() {
 		return id;

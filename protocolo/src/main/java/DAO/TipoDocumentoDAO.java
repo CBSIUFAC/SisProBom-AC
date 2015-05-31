@@ -8,6 +8,11 @@ import entity.TipoDocumento;
 
 public class TipoDocumentoDAO extends MasterDAO {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1201673786348149081L;
+
 	public void inserirTipoDocumento(TipoDocumento tipoDocumento) throws DataException {
 		inserirObjeto(tipoDocumento);
 	}

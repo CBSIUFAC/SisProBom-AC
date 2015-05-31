@@ -7,6 +7,11 @@ import entity.Movimentacao;
 
 public class MovimentacaoDAO extends MasterDAO {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 718964928386934482L;
+
 	public void inserirMovimentacao(Movimentacao movimentacao) {
 		inserirObjeto(movimentacao);
 	}

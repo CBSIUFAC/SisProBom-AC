@@ -5,6 +5,12 @@ import java.util.List;
 import entity.Usuario;
 
 public class UsuarioDAO extends MasterDAO {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2310579874038706006L;
+
 	public void inserirUsuario(Usuario usuario) {
 		inserirObjeto(usuario);
 	}

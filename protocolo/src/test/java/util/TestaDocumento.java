@@ -2,10 +2,7 @@ package util;
 
 import java.util.List;
 
-import com.lowagie.text.Document;
-
 import entity.Documento;
-import entity.Funcionario;
 import DAO.DocumentoDAO;
 import DAO.FuncionarioDAO;
 import DAO.TipoDocumentoDAO;

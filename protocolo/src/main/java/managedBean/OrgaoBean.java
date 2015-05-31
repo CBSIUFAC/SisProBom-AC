@@ -19,6 +19,11 @@ import entity.Orgao;
 @SessionScoped
 public class OrgaoBean implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5320787613780463435L;
+	
 	private Orgao orgao;
 	private OrgaoDAO dao = new OrgaoDAO();
 	private List<Orgao> lista = null;

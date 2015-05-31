@@ -6,6 +6,11 @@ import entity.Funcionario;
 
 public class FuncionarioDAO extends MasterDAO {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4312484506637637243L;
+
 	public void inserirFuncionario(Funcionario funcionario) {
 		inserirObjeto(funcionario);
 	}

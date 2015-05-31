@@ -13,6 +13,11 @@ import javax.persistence.OneToMany;
 @Entity
 public class Orgao implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8280837001985101020L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;

@@ -19,6 +19,11 @@ import entity.Funcionario;
 @SessionScoped
 public class FuncionarioBean implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8607116946061653251L;
+	
 	private Funcionario funcionario;
 	private FuncionarioDAO dao = new FuncionarioDAO();
 	private List<Funcionario> lista = null;

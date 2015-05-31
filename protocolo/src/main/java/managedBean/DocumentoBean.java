@@ -21,6 +21,11 @@ import entity.Orgao;
 @SessionScoped
 public class DocumentoBean implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8011773251262249979L;
+	
 	private Documento documento;
 	private DocumentoDAO dao = new DocumentoDAO();
 	private List<Documento> lista = null;

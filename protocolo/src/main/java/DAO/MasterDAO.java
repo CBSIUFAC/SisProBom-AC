@@ -11,6 +11,11 @@ import util.HibernateUtil;
 
 public class MasterDAO implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2326278635399775973L;
+
 	public Session getSession() {
 		return HibernateUtil.getSessionFactory().openSession();
 	}

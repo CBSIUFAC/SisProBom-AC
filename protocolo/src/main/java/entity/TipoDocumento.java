@@ -13,6 +13,11 @@ import javax.persistence.OneToMany;
 @Entity
 public class TipoDocumento implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2466424924364616019L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;

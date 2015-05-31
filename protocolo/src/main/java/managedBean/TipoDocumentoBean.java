@@ -19,6 +19,11 @@ import entity.TipoDocumento;
 @SessionScoped
 public class TipoDocumentoBean implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9188790501996395628L;
+	
 	private TipoDocumento tipoDocumento;
 	private TipoDocumentoDAO dao = new TipoDocumentoDAO();
 	private List<TipoDocumento> lista = null;
