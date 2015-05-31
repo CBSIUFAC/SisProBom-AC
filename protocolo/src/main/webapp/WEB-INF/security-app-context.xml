@@ -7,42 +7,21 @@
 	<global-method-security secured-annotations="enabled"
 		jsr250-annotations="enabled" />
 
-	<http auto-config="true" use-expressions="true"
-		access-denied-page="/error.jsf">
-<<<<<<< HEAD
-		<intercept-url pattern="/documentosss.jsf" access="isAuthenticated()" />
-		<intercept-url pattern="/funcionariosss.jsf" access="isAuthenticated()" />
-		<intercept-url pattern="/orgaoexternosss.jsf" access="isAuthenticated()" />
-		<intercept-url pattern="/orgaointernosss.jsf" access="isAuthenticated()" />
-		<intercept-url pattern="/tipodocumentosss.jsf" access="isAuthenticated()" />
-		<intercept-url pattern="/movimentacaosss.jsf" access="isAuthenticated()" />
-=======
-		<intercept-url pattern="/documento.jsf" access="isAuthenticated()" />
-		<intercept-url pattern="/funcionario.jsf" access="isAuthenticated()" />
-		<intercept-url pattern="/OrgaoExterno.jsf" access="isAuthenticated()" />
-		<intercept-url pattern="/OrgaoInterno.jsf" access="isAuthenticated()" />
-		<intercept-url pattern="/tipodocumento.jsf" access="isAuthenticated()" />
-		<intercept-url pattern="/movimentacao.jsf" access="isAuthenticated()" />
-<<<<<<< HEAD
->>>>>>> branch 'master' of https://github.com/CBSIUFAC/SisProBom-AC.git
-=======
->>>>>>> refs/remotes/origin/master
-		<intercept-url pattern="/index.jsf" access="isAuthenticated()" />
+	<http auto-config="true" use-expressions="true" access-denied-page="/error.jsf">
+	
 		<intercept-url pattern="/login.jsf" access="permitAll" />
-<<<<<<< HEAD
-<<<<<<< HEAD
-		<intercept-url pattern="/usuarios.jsf" access="hasAnyRole('1')" />
-		<form-login login-page="/login.jsf" default-target-url="/index.jsf"
-			authentication-failure-url="/login.jsf" />
+		<intercept-url pattern="/javax.faces.resource/**" access="permitAll" />
+		<intercept-url pattern="/usuario.jsf" access="hasRole(1)" />
+		<intercept-url pattern="/**" access="isAuthenticated()" />
+		
+		<form-login login-page="/login.jsf"
+			default-target-url="/index.jsf"
+			authentication-failure-url="/login.jsf?error"
+			username-parameter="nome"
+			password-parameter="senha" />
+			
 		<logout logout-success-url="/login.jsf" />
-=======
-=======
->>>>>>> refs/remotes/origin/master
-		<intercept-url pattern="/usuarios.jsf" access="permitAll" />
-		<form-login login-page="/login.jsf" default-target-url="/documento.jsf"
-			authentication-failure-url="/error.jsf" />
-		<logout logout-success-url="/documento.jsf" />
->>>>>>> branch 'master' of https://github.com/CBSIUFAC/SisProBom-AC.git
+		
 	</http>
 	
 	<authentication-manager alias="authenticationManager">
@@ -50,7 +29,7 @@
 			<password-encoder hash="sha-256" />
 			<jdbc-user-service data-source-ref="dataSource"
 				authorities-by-username-query="select nome, perfil from usuario where nome=?"
-				users-by-username-query="select nome, senha, ativo  from usuario where nome=?" />
+				users-by-username-query="select nome, senha, CASE ativo WHEN 1 THEN 'true' ELSE 'false' END 'ativo' from usuario where nome=?" />
 		</authentication-provider>
 	</authentication-manager>
 

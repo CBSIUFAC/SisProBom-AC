@@ -1,15 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/templates/layout.xhtml"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui">
 
-    <h:head>
-        <title>Erro</title>
-    </h:head>
-    <h:body>
-        <h1>Volte a tela de login, erro no usuario!</h1>
-        
-    </h:body>
-</html>
+	<ui:define name="titulo">Erro</ui:define>
+	
+	<ui:define name="conteudo">
+	
+		<h1>Acesso negado!</h1>
+	
+	</ui:define>
+
+</ui:composition>

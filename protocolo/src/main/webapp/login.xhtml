@@ -5,24 +5,33 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Bem vindo!</title>
+	<title>Sistema de Protocolo do CBMAC</title>
+	<h:outputStylesheet library="css" name="protocolo.css" />
 </h:head>
 <h:body>
-	<p:dialog header="Login" visible="true" closable="false" modal="true"
-		draggable="false" resizable="false" width="600">
+
+	<p:dialog header="Sistema de Protocolo do CBMAC - Login"
+			  visible="true"
+			  closable="false"
+			  modal="true"
+			  draggable="false"
+			  resizable="false">
 		<form id="formLogin" method="post" action="j_spring_security_check">
-			<p:panelGrid id="panelLogin" columns="3" style="margin-bottom:10px">
-				<h:outputLabel value="Username:" />
-				<p:inputText id="j_nome" required="true"
-					requiredMessage="Usuário é obrigatório" />
-				<p:message for="j_nome" />
-				<h:outputLabel value="Password: " />
-				<p:password id="j_senha" required="true"
-					requiredMessage="Senha é obrigatória" />
-				<p:message for="j_senha" />
-				<h:commandButton value="Login" type="submit"/>
+			<p:panelGrid id="panelLogin" columns="2" cellpadding="5">
+				
+				<h:outputLabel value="Usuário:" />
+				<p:inputText id="nome" required="true" />
+				
+				<h:outputLabel value="Senha: " />
+				<p:password id="senha" required="true" />
+				
+				<f:facet name="footer">
+					<h:commandButton value="Login" type="submit" styleClass="botaoForm" />
+				</f:facet>
+				
 			</p:panelGrid>
 		</form>
 	</p:dialog>
+	
 </h:body>
 </html>
