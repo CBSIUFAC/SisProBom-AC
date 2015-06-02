@@ -124,5 +124,22 @@ body {
 
 .botaoLogout {
 	float: right;
-  	margin: 0.4em 0.8em 0 0 !important;
+	font-size: 75% !important;
+	margin: 0.6em 0.9em 0 0 !important;
+}
+
+.infoUsuario {
+	float: right;
+	font-weight: bold;
+  	margin: 0.75em 0.8em 0 0 !important;
+}
+
+.dialogLogin .ui-dialog-titlebar {
+  padding: 0.4em 1em .4em 1em !important;
+}
+
+.dialogLogin .ui-dialog-title {
+  width: 100%;
+  margin: .3em 0 .1em 0 !important;
+  text-align: center;
 }

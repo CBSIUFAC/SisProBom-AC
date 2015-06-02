@@ -14,6 +14,9 @@ import javax.faces.context.FacesContext;
 import org.hibernate.JDBCException;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import DAO.UsuarioDAO;
 import entity.Usuario;
@@ -138,6 +141,41 @@ public class UsuarioBean implements Serializable {
 	
 	public void setSenhaCriptografada(String senhaCriptografada) {
 		this.senhaCriptografada = senhaCriptografada;
+	}
+	
+	public String getUsuarioAutenticado() {
+		
+		String usuario = null;
+		Authentication autenticao = SecurityContextHolder.getContext().getAuthentication();
+		
+		if (!(autenticao instanceof AnonymousAuthenticationToken)) {
+			usuario = autenticao.getName();
+		}
+		
+		return usuario;
+		
+	}
+	
+	public String getUsuarioAutenticadoPerfil() {
+		
+		String perfil = null;
+		String nomePerfil = null;
+		Authentication autenticao = SecurityContextHolder.getContext().getAuthentication();
+		
+		if (!(autenticao instanceof AnonymousAuthenticationToken)) {
+			
+			perfil = autenticao.getAuthorities().toArray()[0].toString();
+			
+			if (perfil.equals("1")) {
+				nomePerfil = "Administrador";
+			} else if (perfil.equals("2")) {
+				nomePerfil = "Usuário comum";
+			}
+			
+		}
+		
+		return nomePerfil;
+		
 	}
 
 }

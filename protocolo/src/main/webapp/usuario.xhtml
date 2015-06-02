@@ -83,20 +83,24 @@
 			        <h:outputText value="#{r.id}" />
 			    </p:column>
 			     
-			     <p:column headerText="Usuário" filterBy="#{r.nome}" filterMatchMode="contains" sortBy="#{r.nome}">
+			    <p:column headerText="Usuário" filterBy="#{r.nome}" filterMatchMode="contains" sortBy="#{r.nome}">
 			        <h:outputText value="#{r.nome}" />
 			    </p:column> 
 						    
 			    <p:column headerText="Perfil" filterBy="#{r.perfil}" filterMatchMode="contains" sortBy="#{r.perfil}">
-			    	<h:outputText value="#{r.perfil == 1 ? 'Admin' : 'Usuário comum'}" />
+			    	<h:outputText value="#{r.perfil == 1 ? 'Administrador' : 'Usuário comum'}" />
 			    </p:column>
 			    
 			    <p:column headerText="Funcionário" filterBy="#{r.funcionario.nome}" filterMatchMode="contains" sortBy="#{r.funcionario.nome}">
 			    	<h:outputText value="#{r.funcionario.nome}" />
 			    </p:column>
 			    
-			     <p:column headerText="Matrícula" filterBy="#{r.funcionario.matricula}" filterMatchMode="exact" sortBy="#{r.funcionario.matricula}">
+			    <p:column headerText="Matrícula" filterBy="#{r.funcionario.matricula}" filterMatchMode="exact" sortBy="#{r.funcionario.matricula}">
 			    	<h:outputText value="#{r.funcionario.matricula}" />
+			    </p:column>
+			    
+			    <p:column headerText="Ativo" filterBy="#{r.ativo}" filterMatchMode="exact" sortBy="#{r.ativo}">
+			    	<h:outputText value="#{r.ativo ? 'Sim' : 'Não' }" />
 			    </p:column>
 			 
 			    
@@ -125,14 +129,14 @@
 					<p:password id="senha" value="#{usuarioBean.usuario.senha}" required="true" />
 					<p:outputLabel value="Perfil:"/>
 					<p:selectOneMenu id="perfil" value="#{usuarioBean.usuario.perfil}">
-						<f:selectItem itemLabel="Admin" itemValue="1" />
+						<f:selectItem itemLabel="Administrador" itemValue="1" />
 						<f:selectItem itemLabel="Usuario" itemValue="2" />
 					</p:selectOneMenu>
 					<p:outputLabel value="Ativo:" />
 					<p:selectOneMenu id="ativo" value="#{usuarioBean.usuario.ativo}">
-					<f:selectItem itemLabel="Sim" itemValue="true"/>
-					<f:selectItem itemLabel="Não" itemValue="false"/>
-				</p:selectOneMenu>
+						<f:selectItem itemLabel="Sim" itemValue="true"/>
+						<f:selectItem itemLabel="Não" itemValue="false"/>
+					</p:selectOneMenu>
 						   
 										
 					<f:facet name="footer">
